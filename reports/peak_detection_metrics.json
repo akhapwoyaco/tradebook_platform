@@ -1,0 +1,13 @@
+{
+    "gradient_boosting_v1_accuracy": 0.9501867629468185,
+    "gradient_boosting_v1_precision": 1.0,
+    "gradient_boosting_v1_recall": 0.0014710208884966167,
+    "gradient_boosting_v1_f1_score": 0.002937720329024677,
+    "gradient_boosting_v1_true_positives": 20,
+    "gradient_boosting_v1_false_positives": 0,
+    "gradient_boosting_v1_true_negatives": 258942,
+    "gradient_boosting_v1_false_negatives": 13576,
+    "gradient_boosting_v1_specificity": 1.0,
+    "gradient_boosting_v1_roc_auc": 0.5829764672401998,
+    "gradient_boosting_v1_pr_auc": 0.10024328214694828
+}

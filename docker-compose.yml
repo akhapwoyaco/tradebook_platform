@@ -1,0 +1,48 @@
+version: '3.8'
+
+services:
+  # 1. Synthetic Data API Service (GPU-enabled)
+  synthetic-data-api:
+    # Uses the specific Dockerfile designed for the GPU/synthetic data component
+    build:
+      context: .
+      dockerfile: synthetic_data/Dockerfile.gpu
+    image: tradebook_pipeline_synthetic_api:local
+    # Map the application port (default 5000)
+    ports:
+      - "5000:5000"
+    # Mount local directories for configuration and models
+    volumes:
+      - ./config:/app/config:ro
+      - ./models:/app/models
+      # Optional: Mount a data directory if needed for local testing
+      # - ./data:/app/data
+    # Use config.local.yaml for local development overrides
+    environment:
+      - CONFIG_FILE_PATH=/app/config/config.local.yaml
+    # Enable GPU access for the synthetic data generation
+    deploy:
+      resources:
+        reservations:
+          devices:
+            - driver: nvidia
+              count: all
+              capabilities: [gpu]
+
+  # 2. Pipeline Execution Service (CPU-bound) - For local testing of main pipeline
+  pipeline-executor:
+    # Assuming you have a standard CPU Dockerfile for the main pipeline
+    build:
+      context: .
+      dockerfile: tradebook_platform/Dockerfile.cpu # Placeholder: Assume you create this
+    image: tradebook_pipeline_executor:local
+    command: python main_pipeline/TradebookPipeline.py --config /app/config/config.local.yaml
+    volumes:
+      - ./config:/app/config:ro
+      - ./data:/app/data
+      - ./models:/app/models
+      - ./reports:/app/reports
+    environment:
+      - CONFIG_FILE_PATH=/app/config/config.local.yaml
+    # This service runs the full pipeline once upon startup
+    restart: "no"

@@ -1,0 +1,44 @@
+{
+  "ingestion_metrics": {
+    "total_attempts": 13,
+    "successful_ingestions": 13,
+    "failed_ingestions": 0,
+    "retry_attempts": 0,
+    "last_success_time": "2025-10-01 07:42:03.312243",
+    "last_failure_time": null,
+    "consecutive_failures": 0,
+    "ingestion_durations": [
+      27.30580711364746,
+      6.102147817611694,
+      8.759146213531494,
+      13.029787540435791,
+      10.746142148971558,
+      9.684524059295654,
+      9.78807258605957,
+      9.201756954193115,
+      10.708074569702148,
+      10.454315423965454,
+      9.220950841903687,
+      8.724871635437012,
+      26.80337405204773
+    ],
+    "failure_reasons": [],
+    "success_rate": 1.0,
+    "avg_duration": 12.34838238129249
+  },
+  "pipeline_metrics": {
+    "pipeline_runs": 1,
+    "successful_runs": 1,
+    "failed_runs": 1,
+    "last_run_time": "2025-10-01 07:42:28.269769",
+    "average_run_duration": 848.975282,
+    "run_durations": [
+      848.975282
+    ],
+    "step_failures": {
+      "synthetic_data_generation": 1
+    },
+    "success_rate": 0.5
+  },
+  "system_health": "WARNING"
+}

@@ -1,0 +1,53 @@
+{
+  "ingestion_metrics": {
+    "total_attempts": 14,
+    "successful_ingestions": 14,
+    "failed_ingestions": 0,
+    "retry_attempts": 0,
+    "last_success_time": "2025-09-29 16:59:12.857134",
+    "last_failure_time": null,
+    "consecutive_failures": 0,
+    "ingestion_durations": [
+      60.469330072402954,
+      27.737047910690308,
+      27.49519991874695,
+      18.572080850601196,
+      15.936737060546875,
+      16.69307518005371,
+      14.086950778961182,
+      12.54262661933899,
+      13.095900297164917,
+      12.93106746673584,
+      10.80988073348999,
+      8.82673168182373,
+      8.71688461303711,
+      10.568767786026001
+    ],
+    "failure_reasons": [],
+    "live_trading_status": {
+      "timestamp": "2025-09-29T16:59:54.492150",
+      "portfolio_value": 10049.01050700424,
+      "total_return_pct": 0.4901050700423911,
+      "total_trades": 1,
+      "consecutive_errors": 0,
+      "max_drawdown_pct": 0.3083595197762132
+    },
+    "success_rate": 1.0,
+    "avg_duration": 18.463020069258555
+  },
+  "pipeline_metrics": {
+    "pipeline_runs": 1,
+    "successful_runs": 1,
+    "failed_runs": 1,
+    "last_run_time": "2025-09-29 17:00:11.402901",
+    "average_run_duration": 1052.834433,
+    "run_durations": [
+      1052.834433
+    ],
+    "step_failures": {
+      "synthetic_data_generation": 1
+    },
+    "success_rate": 0.5
+  },
+  "system_health": "WARNING"
+}

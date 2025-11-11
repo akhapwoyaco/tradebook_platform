@@ -1,0 +1,78 @@
+{
+  "ingestion_metrics": {
+    "total_attempts": 31,
+    "successful_ingestions": 30,
+    "failed_ingestions": 1,
+    "retry_attempts": 0,
+    "last_success_time": "2025-09-27 19:19:07.498688",
+    "last_failure_time": "2025-09-27 19:20:38.531684",
+    "consecutive_failures": 1,
+    "ingestion_durations": [
+      21.185164213180542,
+      6.296871662139893,
+      7.686706066131592,
+      6.378344774246216,
+      6.436784744262695,
+      7.151475667953491,
+      7.798876762390137,
+      5.463078260421753,
+      6.726905345916748,
+      6.233868360519409,
+      5.252149820327759,
+      6.329912900924683,
+      6.3396711349487305,
+      7.63941502571106,
+      7.7609264850616455,
+      5.5602192878723145,
+      5.962169170379639,
+      7.753497838973999,
+      6.470765590667725,
+      5.80477499961853,
+      5.951555252075195,
+      10.451292753219604,
+      5.821573972702026,
+      8.104912042617798,
+      10.731596946716309,
+      5.780879735946655,
+      5.826528787612915,
+      7.638592720031738,
+      7.779227018356323,
+      7.17039680480957
+    ],
+    "failure_reasons": [
+      {
+        "timestamp": "2025-09-27 19:20:38.531684",
+        "source": "exchange",
+        "symbol": "BTC/USDT",
+        "error": "No data returned",
+        "error_type": "Exception"
+      }
+    ],
+    "live_trading_status": {
+      "timestamp": "2025-09-27T19:19:46.776948",
+      "portfolio_value": 9993.388938446697,
+      "total_return_pct": -0.06611061553303443,
+      "total_trades": 1,
+      "consecutive_errors": 0,
+      "max_drawdown_pct": 0.11318563539758544
+    },
+    "success_rate": 0.967741935483871,
+    "avg_duration": 7.38293780485789
+  },
+  "pipeline_metrics": {
+    "pipeline_runs": 1,
+    "successful_runs": 1,
+    "failed_runs": 2,
+    "last_run_time": "2025-09-27 19:20:38.562872",
+    "average_run_duration": 1995.21352,
+    "run_durations": [
+      1995.21352
+    ],
+    "step_failures": {
+      "synthetic_data_generation": 1,
+      "live_trading_loop": 1
+    },
+    "success_rate": 0.3333333333333333
+  },
+  "system_health": "WARNING"
+}

@@ -1,0 +1,52 @@
+# Use a NVIDIA CUDA base image for GPU support
+# Choose a version compatible with your GPU drivers and TensorFlow/PyTorch versions
+FROM nvidia/cuda:11.8.0-cudnn8-runtime-ubuntu22.04
+
+# Set environment variables
+ENV PYTHONUNBUFFERED 1
+ENV DEBIAN_FRONTEND noninteractive
+
+# Install system dependencies
+RUN apt-get update && apt-get install -y \
+    python3.10 \
+    python3-pip \
+    python3.10-dev \
+    build-essential \
+    libpq-dev \
+    git \
+    curl \
+    --no-install-recommends && \
+    rm -rf /var/lib/apt/lists/*
+
+# Set Python 3.10 as default
+RUN update-alternatives --install /usr/bin/python python /usr/bin/python3.10 1 \
+    && update-alternatives --install /usr/bin/pip pip /usr/bin/pip3 1
+
+# Create application directory
+WORKDIR /app
+
+# Copy requirements file first to leverage Docker cache
+COPY requirements.txt /app/
+
+# Install Python dependencies
+# Ensure your requirements.txt pins specific versions for reproducibility (e.g., tensorflow==2.10.0)
+RUN pip install --no-cache-dir -r requirements.txt
+
+# Copy the rest of the application code
+# IMPORTANT: Create a .dockerignore file in your project root to exclude unnecessary files
+# (e.g., .git, __pycache__, data/, models/, logs/) from the build context.
+COPY . /app/
+
+# Expose the port for the Flask API server
+EXPOSE 5000
+
+# Command to run the Flask API server using Waitress
+# This will be used when running the container
+CMD ["waitress-serve", "--listen=0.0.0.0:5000", "synthetic_data.api.server:app"]
+
+# Instructions to build and run:
+# 1. Build the Docker image:
+#    docker build -t tradebook_pipeline_gpu -f Dockerfile.gpu .
+# 2. Run the container (mapping port 5000 and providing GPU access):
+#    docker run --gpus all -p 5000:5000 tradebook_pipeline_gpu
+#    (If you don't have --gpus all, check your nvidia-docker setup)

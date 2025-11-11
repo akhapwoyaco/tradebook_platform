@@ -1,0 +1,209 @@
+{
+  "model_type": "CTGAN",
+  "generator_model": {
+    "model_type": "CTGAN",
+    "numeric_stats": {
+      "price": {
+        "mean": 117449.58942177804,
+        "std": 104.42129218004234,
+        "min": 117262.43,
+        "max": 117681.27,
+        "median": 117430.2,
+        "q25": 117369.85,
+        "q75": 117528.78
+      },
+      "volume": {
+        "mean": 0.01634307945747076,
+        "std": 0.11599078055882725,
+        "min": 1e-05,
+        "max": 4.21744,
+        "median": 0.0005,
+        "q25": 0.0001,
+        "q75": 0.00257
+      },
+      "price_ma": {
+        "mean": 117449.51811891935,
+        "std": 104.3833793753906,
+        "min": 117263.04750000002,
+        "max": 117681.26299999999,
+        "median": 117430.291,
+        "q25": 117369.52575,
+        "q75": 117528.77825
+      },
+      "volume_ma": {
+        "mean": 0.016345547463310045,
+        "std": 0.028797044434595263,
+        "min": 0.0001189999999999556,
+        "max": 0.2819805,
+        "median": 0.006490999999999983,
+        "q25": 0.0022134999999999768,
+        "q75": 0.017232250000000005
+      },
+      "log_returns": {
+        "mean": -3.760794227033391e-08,
+        "std": 3.646926454828406e-06,
+        "min": -0.00018390815625665889,
+        "max": 0.0001839081562566585,
+        "median": 0.0,
+        "q25": -8.52263417296969e-08,
+        "q75": 8.51167998718879e-08
+      },
+      "volatility": {
+        "mean": 1.877048569652323e-06,
+        "std": 2.8998848174789733e-06,
+        "min": 0.0,
+        "max": 7.30857326611218e-05,
+        "median": 1.4886942911612691e-06,
+        "q25": 5.309130227261674e-07,
+        "q75": 2.470338043125183e-06
+      },
+      "price_momentum": {
+        "mean": -0.044576420173606746,
+        "std": 1.8642425174523904,
+        "min": -23.44000000000233,
+        "max": 19.819999999992433,
+        "median": 0.0,
+        "q25": -1.0199999999895226,
+        "q75": 0.5899999999965075
+      },
+      "type": {
+        "mean": NaN,
+        "std": NaN,
+        "min": NaN,
+        "max": NaN,
+        "median": NaN,
+        "q25": NaN,
+        "q75": NaN
+      }
+    },
+    "categorical_stats": {},
+    "correlations": {
+      "price": {
+        "price": 1.0,
+        "volume": 0.017172636396927253,
+        "price_ma": 0.9992781953919592,
+        "volume_ma": 0.06845411461657296,
+        "log_returns": -0.005352392676047545,
+        "volatility": -0.06326143191763231,
+        "price_momentum": -0.008160053838668748,
+        "type": NaN
+      },
+      "volume": {
+        "price": 0.017172636396927253,
+        "volume": 1.0,
+        "price_ma": 0.01723348656982734,
+        "volume_ma": 0.2364016779358422,
+        "log_returns": 0.001215427247929756,
+        "volatility": -0.025218016522789353,
+        "price_momentum": -0.0038114437374030764,
+        "type": NaN
+      },
+      "price_ma": {
+        "price": 0.9992781953919592,
+        "volume": 0.01723348656982734,
+        "price_ma": 1.0,
+        "volume_ma": 0.06895228107212475,
+        "log_returns": -0.012592873690813388,
+        "volatility": -0.06453122361173017,
+        "price_momentum": -0.02321601423895746,
+        "type": NaN
+      },
+      "volume_ma": {
+        "price": 0.06845411461657296,
+        "volume": 0.2364016779358422,
+        "price_ma": 0.06895228107212475,
+        "volume_ma": 1.0,
+        "log_returns": -0.012900626450844528,
+        "volatility": -0.06828516464685824,
+        "price_momentum": -0.029440401622517192,
+        "type": NaN
+      },
+      "log_returns": {
+        "price": -0.005352392676047545,
+        "volume": 0.001215427247929756,
+        "price_ma": -0.012592873690813388,
+        "volume_ma": -0.012900626450844528,
+        "log_returns": 1.0,
+        "volatility": 0.01730763593354913,
+        "price_momentum": 0.45651126016984356,
+        "type": NaN
+      },
+      "volatility": {
+        "price": -0.06326143191763231,
+        "volume": -0.025218016522789353,
+        "price_ma": -0.06453122361173017,
+        "volume_ma": -0.06828516464685824,
+        "log_returns": 0.01730763593354913,
+        "volatility": 1.0,
+        "price_momentum": 0.08118544778123031,
+        "type": NaN
+      },
+      "price_momentum": {
+        "price": -0.008160053838668748,
+        "volume": -0.0038114437374030764,
+        "price_ma": -0.02321601423895746,
+        "volume_ma": -0.029440401622517192,
+        "log_returns": 0.45651126016984356,
+        "volatility": 0.08118544778123031,
+        "price_momentum": 1.0,
+        "type": NaN
+      },
+      "type": {
+        "price": NaN,
+        "volume": NaN,
+        "price_ma": NaN,
+        "volume_ma": NaN,
+        "log_returns": NaN,
+        "volatility": NaN,
+        "price_momentum": NaN,
+        "type": NaN
+      }
+    }
+  },
+  "training_metadata": {
+    "n_samples": 18211,
+    "n_features": 8,
+    "feature_columns": [
+      "price",
+      "volume",
+      "price_ma",
+      "volume_ma",
+      "log_returns",
+      "volatility",
+      "price_momentum",
+      "type"
+    ],
+    "data_types": {
+      "price": "float64",
+      "volume": "float64",
+      "price_ma": "float64",
+      "volume_ma": "float64",
+      "log_returns": "float64",
+      "volatility": "float64",
+      "price_momentum": "float64",
+      "type": "float64"
+    },
+    "numeric_columns": [
+      "price",
+      "volume",
+      "price_ma",
+      "volume_ma",
+      "log_returns",
+      "volatility",
+      "price_momentum",
+      "type"
+    ],
+    "categorical_columns": []
+  },
+  "feature_columns": [
+    "price",
+    "volume",
+    "price_ma",
+    "volume_ma",
+    "log_returns",
+    "volatility",
+    "price_momentum",
+    "type"
+  ],
+  "seq_len": 24
+}

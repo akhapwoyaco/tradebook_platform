@@ -1,0 +1,242 @@
+2025-09-27 10:59:09 | INFO     | __main__:setup_environment:128 - Setting up training environment...
+2025-09-27 10:59:09 | INFO     | config.ConfigLoader:load_config:85 - ConfigLoader.load_config called. Path: config\config.yaml, Validate: False
+2025-09-27 10:59:09 | INFO     | config.ConfigLoader:load_config:105 - Configuration loaded successfully from C:\Users\Administrator\Documents\DAVY\project_complete\tradebook_pipeline\tradebook_platform\config\config.yaml
+2025-09-27 10:59:09 | INFO     | config.ConfigLoader:load_config:123 - Schema validation skipped for backward compatibility.
+2025-09-27 10:59:09 | INFO     | main_pipeline.TradebookPipeline:__init__:389 - Initializing modern TradebookPipeline...
+2025-09-27 10:59:09 | INFO     | synthetic_data.smart_integration:__init__:25 - SmartSyntheticIntegration initialized. Default generation mode: local
+2025-09-27 10:59:09 | INFO     | main_pipeline.TradebookPipeline:__init__:419 - TradebookPipeline initialized. Peak model_dir for saving: models\peak_detection
+2025-09-27 10:59:09 | INFO     | peak_estimators.estimator_factory:__init__:31 - PeakEstimatorFactory initialized. Model storage base for loading: models\peak_detection
+2025-09-27 10:59:09 | INFO     | peak_estimators.estimator_factory:__init__:32 - PeakEstimatorFactory initialized. Model storage base: models\peak_detection
+2025-09-27 10:59:09 | INFO     | main_pipeline.TradebookPipeline:__init__:123 - ModernSyntheticDataGenerator initialized with generator type: %s
+2025-09-27 10:59:09 | INFO     | main_pipeline.TradebookPipeline:__init__:439 - Modern TradebookPipeline initialized successfully.
+2025-09-27 10:59:09 | INFO     | __main__:setup_environment:162 - Training environment setup completed successfully
+2025-09-27 10:59:09 | INFO     | __main__:train_complete_pipeline:353 - ============================================================
+2025-09-27 10:59:09 | INFO     | __main__:train_complete_pipeline:354 - 🚀 Starting Complete Pipeline Training
+2025-09-27 10:59:09 | INFO     | __main__:train_complete_pipeline:355 - ============================================================
+2025-09-27 10:59:09 | INFO     | __main__:train_complete_pipeline:369 - 📊 Step 1: Loading raw data...
+2025-09-27 10:59:09 | INFO     | __main__:execute_training_step:337 - Executing step: load_raw_data
+2025-09-27 10:59:09 | INFO     | main_pipeline.TradebookPipeline:load_raw_data:455 - Loading raw data from data\raw\sample_data.csv...
+2025-09-27 10:59:09 | INFO     | main_pipeline.TradebookPipeline:load_raw_data:465 - Raw data loaded: (272538, 4), Index(['date', 'type', 'price', 'amount'], dtype='object'),             date type   price  amount
+0  1617840002522    b  257.10  4.3506
+1  1617840002522    b  257.09  4.0080
+2025-09-27 10:59:10 | INFO     | main_pipeline.TradebookPipeline:load_raw_data:483 - Raw data loaded successfully. Shape: (272538, 4)
+2025-09-27 10:59:10 | INFO     | __main__:execute_training_step:342 - ✓ Step completed successfully: load_raw_data
+2025-09-27 10:59:10 | INFO     | __main__:validate_data_quality:290 - Validating data quality for raw...
+2025-09-27 10:59:10 | INFO     | __main__:validate_data_quality:324 - raw data shape: (272538, 4)
+2025-09-27 10:59:10 | INFO     | __main__:validate_data_quality:325 - raw data null percentage: 0.00%
+2025-09-27 10:59:10 | INFO     | __main__:train_complete_pipeline:379 - 🔧 Step 2: Preprocessing data...
+2025-09-27 10:59:10 | INFO     | __main__:execute_training_step:337 - Executing step: preprocess_data
+2025-09-27 10:59:10 | INFO     | main_pipeline.TradebookPipeline:preprocess_data:497 - Starting modern data preprocessing...
+2025-09-27 10:59:10 | INFO     | main_pipeline.TradebookPipeline:preprocess_data:503 - Generating data quality report...
+2025-09-27 10:59:15 | INFO     | main_pipeline.TradebookPipeline:preprocess_data:512 - Data quality report saved to data\synthetic\datasets\data_quality_report.html
+2025-09-27 10:59:15 | INFO     | main_pipeline.TradebookPipeline:preprocess_data:552 - Preprocessing complete. 'is_peak' value counts: 
+is_peak
+0    258942
+1     13596
+Name: count, dtype: int64
+2025-09-27 10:59:15 | INFO     | main_pipeline.TradebookPipeline:preprocess_data:558 - Processing 'type' column for encoding.
+2025-09-27 10:59:15 | DEBUG    | main_pipeline.TradebookPipeline:preprocess_data:579 - LabelEncoder classes (mapping): {'a': 0, 'b': 1}
+2025-09-27 10:59:15 | INFO     | main_pipeline.TradebookPipeline:preprocess_data:583 - Successfully encoded 'type' column to 'type_encoded'.
+2025-09-27 10:59:15 | INFO     | main_pipeline.TradebookPipeline:preprocess_data:584 - DataFrame head after 'type_encoded':
+    type_encoded
+0              1
+51             1
+2              1
+2025-09-27 10:59:15 | INFO     | main_pipeline.TradebookPipeline:_add_engineered_features:640 - Adding engineered features...
+2025-09-27 10:59:16 | INFO     | main_pipeline.TradebookPipeline:preprocess_data:635 - Modern preprocessing completed. Shape: (272538, 21)
+2025-09-27 10:59:16 | INFO     | __main__:execute_training_step:342 - ✓ Step completed successfully: preprocess_data
+2025-09-27 10:59:16 | INFO     | __main__:validate_data_quality:290 - Validating data quality for processed...
+2025-09-27 10:59:16 | INFO     | __main__:validate_data_quality:324 - processed data shape: (272538, 21)
+2025-09-27 10:59:16 | INFO     | __main__:validate_data_quality:325 - processed data null percentage: 0.00%
+2025-09-27 10:59:16 | INFO     | __main__:train_complete_pipeline:390 - 🤖 Step 3: Training synthetic data generator...
+2025-09-27 10:59:16 | INFO     | __main__:execute_training_step:337 - Executing step: train_synthetic_generator
+2025-09-27 10:59:16 | INFO     | main_pipeline.TradebookPipeline:train_synthetic_generator:674 - Training modern synthetic data generator...
+2025-09-27 10:59:16 | INFO     | main_pipeline.TradebookPipeline:train:127 - Training TimeGAN synthetic data generator, library SDV...
+2025-09-27 10:59:16 | INFO     | main_pipeline.TradebookPipeline:train:128 - Args with target_cols=['price', 'amount', 'type_encoded'], entity_col=type_encoded, datetime_col=date
+2025-09-27 10:59:17 | INFO     | main_pipeline.TradebookPipeline:_train_sdv:150 - Column 'date' set as datetime.
+2025-09-27 10:59:17 | INFO     | main_pipeline.TradebookPipeline:_train_sdv:160 - Column 'type_encoded' set as categorical.
+2025-09-27 10:59:17 | INFO     | main_pipeline.TradebookPipeline:_train_sdv:171 - SDV Metadata: No valid sequence key configured or found in data. Assuming single sequence if time-series model chosen.
+2025-09-27 10:59:17 | INFO     | main_pipeline.TradebookPipeline:_train_sdv:182 - SDV Metadata: No valid sequence key configured or found in data.
+2025-09-27 10:59:17 | INFO     | main_pipeline.TradebookPipeline:_train_sdv:197 - SDV: Instantiated GaussianCopulaSynthesizer.
+2025-09-27 11:06:10 | INFO     | main_pipeline.TradebookPipeline:_train_sdv:223 - SDV synthesizer training completed.
+2025-09-27 11:06:10 | INFO     | main_pipeline.TradebookPipeline:train_synthetic_generator:696 - Synthetic data generator training completed successfully.
+2025-09-27 11:06:10 | INFO     | __main__:execute_training_step:342 - ✓ Step completed successfully: train_synthetic_generator
+2025-09-27 11:06:10 | INFO     | __main__:train_complete_pipeline:404 - 📈 Step 4: Generating synthetic data...
+2025-09-27 11:06:10 | INFO     | __main__:execute_training_step:337 - Executing step: generate_synthetic_data
+2025-09-27 11:06:10 | INFO     | main_pipeline.TradebookPipeline:generate_synthetic_data:704 - Generating 1000 synthetic samples...
+2025-09-27 11:06:10 | INFO     | main_pipeline.TradebookPipeline:generate:336 - Generating 1000 synthetic samples...
+2025-09-27 11:06:11 | INFO     | main_pipeline.TradebookPipeline:generate_synthetic_data:714 - Synthetic data saved to data\synthetic\datasets\synthetic_tradebook_data.parquet. Shape: (1000, 21)
+2025-09-27 11:06:11 | INFO     | __main__:execute_training_step:342 - ✓ Step completed successfully: generate_synthetic_data
+2025-09-27 11:06:11 | INFO     | __main__:validate_data_quality:290 - Validating data quality for synthetic...
+2025-09-27 11:06:11 | INFO     | __main__:validate_data_quality:324 - synthetic data shape: (1000, 21)
+2025-09-27 11:06:11 | INFO     | __main__:validate_data_quality:325 - synthetic data null percentage: 0.00%
+2025-09-27 11:06:11 | INFO     | __main__:train_complete_pipeline:422 - 🔀 Step 5: Combining real and synthetic data...
+2025-09-27 11:06:11 | INFO     | __main__:train_complete_pipeline:450 - Combined real and synthetic data for training. Shape: (273538, 20)
+2025-09-27 11:06:11 | INFO     | __main__:validate_data_quality:290 - Validating data quality for combined...
+2025-09-27 11:06:11 | INFO     | __main__:validate_data_quality:324 - combined data shape: (273538, 20)
+2025-09-27 11:06:11 | INFO     | __main__:validate_data_quality:325 - combined data null percentage: 0.00%
+2025-09-27 11:06:11 | INFO     | __main__:train_complete_pipeline:459 - 🎯 Step 6: Training peak detection estimators...
+2025-09-27 11:06:11 | INFO     | __main__:execute_training_step:337 - Executing step: train_peak_estimators
+2025-09-27 11:06:11 | INFO     | main_pipeline.TradebookPipeline:train_peak_estimators:795 - Training peak estimators...
+2025-09-27 11:06:11 | INFO     | main_pipeline.TradebookPipeline:prepare_data_for_peak_detection:754 - Preparing data for peak detection...
+2025-09-27 11:06:11 | INFO     | main_pipeline.TradebookPipeline:prepare_data_for_peak_detection:759 - Feature columns before engineering lags diff: ['month', 'price_pct_change', 'amount_rolling_std_5', 'day_of_week', 'price', 'is_weekend', 'amount', 'is_peak', 'type_encoded', 'price_rolling_mean_5', 'price_rolling_max_5', 'hour', 'price_rolling_min_5', 'price_rolling_std_5', 'amount_rolling_mean_5', 'amount_rolling_min_5', 'amount_pct_change', 'amount_zscore', 'amount_rolling_max_5', 'price_zscore']
+2025-09-27 11:06:11 | INFO     | main_pipeline.TradebookPipeline:prepare_data_for_peak_detection:786 - Features prepared: (273538, 18), Labels: (273538,)
+2025-09-27 11:06:11 | INFO     | main_pipeline.TradebookPipeline:prepare_data_for_peak_detection:788 - Value counts of 'is_peak' after labeling:
+is_peak
+0    259886
+1     13652
+Name: count, dtype: int64
+2025-09-27 11:06:11 | INFO     | main_pipeline.TradebookPipeline:prepare_data_for_peak_detection:789 - Feature columns: ['price', 'amount', 'price_pct_change', 'amount_rolling_std_5', 'price_rolling_mean_5', 'price_rolling_max_5', 'price_rolling_min_5', 'price_rolling_std_5', 'amount_rolling_mean_5', 'amount_rolling_min_5', 'amount_pct_change', 'amount_zscore', 'amount_rolling_max_5', 'price_zscore', 'hour', 'day_of_week', 'is_weekend', 'month']
+2025-09-27 11:06:11 | INFO     | main_pipeline.TradebookPipeline:train_peak_estimators:801 - train_peak_estimators: self.peak_detection_config at start of method: {'estimators': {'random_forest_v1': {'enabled': True, 'type': 'ml_estimator', 'model_type': 'RandomForestClassifier', 'params': {'n_estimators': 100, 'max_depth': 10, 'min_samples_split': 5, 'random_state': 42}}, 'gradient_boosting_v1': {'enabled': True, 'type': 'ml_estimator', 'model_type': 'GradientBoostingClassifier', 'params': {'n_estimators': 100, 'learning_rate': 0.1, 'max_depth': 6, 'random_state': 42}}}, 'evaluation': {'report_path': 'reports/peak_detection_metrics.json', 'cross_validation': {'enabled': True, 'cv_folds': 5, 'scoring': ['accuracy', 'precision', 'recall', 'f1']}}}
+2025-09-27 11:06:11 | INFO     | main_pipeline.TradebookPipeline:train_peak_estimators:803 - train_peak_estimators: estimators_config after .get('estimators'): {'random_forest_v1': {'enabled': True, 'type': 'ml_estimator', 'model_type': 'RandomForestClassifier', 'params': {'n_estimators': 100, 'max_depth': 10, 'min_samples_split': 5, 'random_state': 42}}, 'gradient_boosting_v1': {'enabled': True, 'type': 'ml_estimator', 'model_type': 'GradientBoostingClassifier', 'params': {'n_estimators': 100, 'learning_rate': 0.1, 'max_depth': 6, 'random_state': 42}}}
+2025-09-27 11:06:11 | INFO     | main_pipeline.TradebookPipeline:train_peak_estimators:811 - Training estimator: random_forest_v1
+2025-09-27 11:06:11 | INFO     | peak_estimators.strategies.base_estimator:__init__:16 - BasePeakEstimator initialized.
+2025-09-27 11:06:11 | INFO     | peak_estimators.strategies.ml_estimator:__init__:98 - MLEstimator __init__: Comparison check - is 'RandomForestClassifier' == 'RandomForestClassifier'? True
+2025-09-27 11:06:11 | INFO     | peak_estimators.strategies.ml_estimator:__init__:99 - MLEstimator __init__: Comparison check - is 'RandomForestClassifier' == 'GradientBoostingClassifier'? False
+2025-09-27 11:06:11 | INFO     | peak_estimators.strategies.ml_estimator:__init__:104 - MLEstimator __init__: Instantiated RandomForestClassifier.
+2025-09-27 11:06:11 | INFO     | peak_estimators.strategies.ml_estimator:__init__:121 - MLEstimator initialized with config: {'enabled': True, 'type': 'ml_estimator', 'model_type': 'RandomForestClassifier', 'params': {'n_estimators': 100, 'max_depth': 10, 'min_samples_split': 5, 'random_state': 42}}
+2025-09-27 11:06:11 | INFO     | peak_estimators.estimator_factory:create_estimator:69 - Created new instance of 'ml_estimator' for estimator 'random_forest_v1'.
+2025-09-27 11:06:11 | INFO     | main_pipeline.TradebookPipeline:train_peak_estimators:816 - Unique values in y_train for random_forest_v1: [0 1]
+2025-09-27 11:06:11 | INFO     | main_pipeline.TradebookPipeline:train_peak_estimators:817 - Value counts for y_train for random_forest_v1:
+is_peak
+0    259886
+1     13652
+Name: count, dtype: int64
+2025-09-27 11:06:11 | INFO     | peak_estimators.strategies.ml_estimator:train:132 - Training RandomForestClassifier model...
+2025-09-27 11:06:11 | INFO     | peak_estimators.strategies.ml_estimator:train:143 - Starting training for ML estimator (RandomForestClassifier) on 273538 samples...
+2025-09-27 11:06:44 | INFO     | peak_estimators.strategies.ml_estimator:train:146 - ML estimator (RandomForestClassifier) trained successfully.
+2025-09-27 11:06:44 | DEBUG    | peak_estimators.strategies.ml_estimator:save_model:238 - Attempting to save model weights to models\peak_detection\random_forest_v1\model_weights.joblib...
+2025-09-27 11:06:44 | INFO     | peak_estimators.strategies.ml_estimator:save_model:240 - ML model weights saved to models\peak_detection\random_forest_v1\model_weights.joblib
+2025-09-27 11:06:44 | DEBUG    | peak_estimators.strategies.ml_estimator:save_model:248 - Preparing metadata for estimator 'RandomForestClassifier'.
+2025-09-27 11:06:44 | DEBUG    | peak_estimators.strategies.ml_estimator:save_model:260 - Metadata prepared: {'model_type': 'RandomForestClassifier', 'features': ['price', 'amount'], 'epochs': 10, 'prediction_threshold': 0.5, 'batch_size': 32, 'learning_rate': 0.001, 'model_weights_file': 'model_weights.joblib', 'trained_on_features': ['price', 'amount'], 'model_params': {'n_estimators': 100, 'max_depth': 10, 'min_samples_split': 5, 'random_state': 42}}
+2025-09-27 11:06:44 | INFO     | peak_estimators.strategies.ml_estimator:save_model:265 - ML estimator metadata saved to models\peak_detection\random_forest_v1\metadata.yaml
+2025-09-27 11:06:44 | INFO     | peak_estimators.strategies.ml_estimator:save_model:270 - ML estimator model saved successfully to models\peak_detection\random_forest_v1.
+2025-09-27 11:06:44 | INFO     | main_pipeline.TradebookPipeline:train_peak_estimators:823 - Estimator 'random_forest_v1' saved to models\peak_detection\random_forest_v1
+2025-09-27 11:06:44 | INFO     | main_pipeline.TradebookPipeline:train_peak_estimators:811 - Training estimator: gradient_boosting_v1
+2025-09-27 11:06:44 | INFO     | peak_estimators.strategies.base_estimator:__init__:16 - BasePeakEstimator initialized.
+2025-09-27 11:06:44 | INFO     | peak_estimators.strategies.ml_estimator:__init__:98 - MLEstimator __init__: Comparison check - is 'GradientBoostingClassifier' == 'RandomForestClassifier'? False
+2025-09-27 11:06:44 | INFO     | peak_estimators.strategies.ml_estimator:__init__:99 - MLEstimator __init__: Comparison check - is 'GradientBoostingClassifier' == 'GradientBoostingClassifier'? True
+2025-09-27 11:06:44 | INFO     | peak_estimators.strategies.ml_estimator:__init__:107 - MLEstimator __init__: Instantiated GradientBoostingClassifier.
+2025-09-27 11:06:44 | INFO     | peak_estimators.strategies.ml_estimator:__init__:121 - MLEstimator initialized with config: {'enabled': True, 'type': 'ml_estimator', 'model_type': 'GradientBoostingClassifier', 'params': {'n_estimators': 100, 'learning_rate': 0.1, 'max_depth': 6, 'random_state': 42}}
+2025-09-27 11:06:44 | INFO     | peak_estimators.estimator_factory:create_estimator:69 - Created new instance of 'ml_estimator' for estimator 'gradient_boosting_v1'.
+2025-09-27 11:06:44 | INFO     | main_pipeline.TradebookPipeline:train_peak_estimators:816 - Unique values in y_train for gradient_boosting_v1: [0 1]
+2025-09-27 11:06:44 | INFO     | main_pipeline.TradebookPipeline:train_peak_estimators:817 - Value counts for y_train for gradient_boosting_v1:
+is_peak
+0    259886
+1     13652
+Name: count, dtype: int64
+2025-09-27 11:06:44 | INFO     | peak_estimators.strategies.ml_estimator:train:132 - Training GradientBoostingClassifier model...
+2025-09-27 11:06:44 | INFO     | peak_estimators.strategies.ml_estimator:train:143 - Starting training for ML estimator (GradientBoostingClassifier) on 273538 samples...
+2025-09-27 11:07:27 | INFO     | peak_estimators.strategies.ml_estimator:train:146 - ML estimator (GradientBoostingClassifier) trained successfully.
+2025-09-27 11:07:27 | DEBUG    | peak_estimators.strategies.ml_estimator:save_model:238 - Attempting to save model weights to models\peak_detection\gradient_boosting_v1\model_weights.joblib...
+2025-09-27 11:07:27 | INFO     | peak_estimators.strategies.ml_estimator:save_model:240 - ML model weights saved to models\peak_detection\gradient_boosting_v1\model_weights.joblib
+2025-09-27 11:07:27 | DEBUG    | peak_estimators.strategies.ml_estimator:save_model:248 - Preparing metadata for estimator 'GradientBoostingClassifier'.
+2025-09-27 11:07:27 | DEBUG    | peak_estimators.strategies.ml_estimator:save_model:260 - Metadata prepared: {'model_type': 'GradientBoostingClassifier', 'features': ['price', 'amount'], 'epochs': 10, 'prediction_threshold': 0.5, 'batch_size': 32, 'learning_rate': 0.001, 'model_weights_file': 'model_weights.joblib', 'trained_on_features': ['price', 'amount'], 'model_params': {'n_estimators': 100, 'learning_rate': 0.1, 'max_depth': 6, 'random_state': 42}}
+2025-09-27 11:07:27 | INFO     | peak_estimators.strategies.ml_estimator:save_model:265 - ML estimator metadata saved to models\peak_detection\gradient_boosting_v1\metadata.yaml
+2025-09-27 11:07:27 | INFO     | peak_estimators.strategies.ml_estimator:save_model:270 - ML estimator model saved successfully to models\peak_detection\gradient_boosting_v1.
+2025-09-27 11:07:27 | INFO     | main_pipeline.TradebookPipeline:train_peak_estimators:823 - Estimator 'gradient_boosting_v1' saved to models\peak_detection\gradient_boosting_v1
+2025-09-27 11:07:27 | INFO     | __main__:execute_training_step:342 - ✓ Step completed successfully: train_peak_estimators
+2025-09-27 11:07:27 | INFO     | __main__:train_complete_pipeline:467 - ✅ Step 7: Model validation...
+2025-09-27 11:07:27 | INFO     | __main__:execute_training_step:337 - Executing step: validate_trained_models
+2025-09-27 11:07:27 | INFO     | __main__:_validate_trained_models:503 - Validating trained models...
+2025-09-27 11:07:27 | INFO     | __main__:_validate_trained_models:511 - Validating estimator: random_forest_v1
+2025-09-27 11:07:27 | INFO     | main_pipeline.TradebookPipeline:run_inference:834 - Running inference with estimator: random_forest_v1
+2025-09-27 11:07:27 | INFO     | peak_estimators.strategies.base_estimator:__init__:16 - BasePeakEstimator initialized.
+2025-09-27 11:07:27 | INFO     | peak_estimators.strategies.ml_estimator:__init__:98 - MLEstimator __init__: Comparison check - is 'RandomForestClassifier' == 'RandomForestClassifier'? True
+2025-09-27 11:07:27 | INFO     | peak_estimators.strategies.ml_estimator:__init__:99 - MLEstimator __init__: Comparison check - is 'RandomForestClassifier' == 'GradientBoostingClassifier'? False
+2025-09-27 11:07:27 | INFO     | peak_estimators.strategies.ml_estimator:__init__:104 - MLEstimator __init__: Instantiated RandomForestClassifier.
+2025-09-27 11:07:27 | INFO     | peak_estimators.strategies.ml_estimator:__init__:121 - MLEstimator initialized with config: {'enabled': True, 'type': 'ml_estimator', 'model_type': 'RandomForestClassifier', 'params': {'n_estimators': 100, 'max_depth': 10, 'min_samples_split': 5, 'random_state': 42}}
+2025-09-27 11:07:27 | INFO     | peak_estimators.estimator_factory:create_estimator:69 - Created new instance of 'ml_estimator' for estimator 'random_forest_v1'.
+2025-09-27 11:07:27 | INFO     | peak_estimators.strategies.ml_estimator:load_model:313 - ML model weights loaded from models\peak_detection\random_forest_v1\model_weights.joblib
+2025-09-27 11:07:27 | INFO     | peak_estimators.strategies.ml_estimator:load_model:323 - ML estimator model and configuration loaded from models\peak_detection\random_forest_v1
+2025-09-27 11:07:27 | INFO     | peak_estimators.estimator_factory:load_estimator:98 - Estimator 'random_forest_v1' loaded successfully from models\peak_detection\random_forest_v1.
+2025-09-27 11:07:27 | INFO     | main_pipeline.TradebookPipeline:prepare_data_for_peak_detection:754 - Preparing data for peak detection...
+2025-09-27 11:07:27 | INFO     | main_pipeline.TradebookPipeline:prepare_data_for_peak_detection:759 - Feature columns before engineering lags diff: ['date', 'price', 'amount', 'is_peak', 'type_encoded', 'hour', 'day_of_week', 'is_weekend', 'month', 'price_rolling_mean_5', 'price_rolling_std_5', 'price_rolling_max_5', 'price_rolling_min_5', 'price_pct_change', 'price_zscore', 'amount_rolling_mean_5', 'amount_rolling_std_5', 'amount_rolling_max_5', 'amount_rolling_min_5', 'amount_pct_change', 'amount_zscore']
+2025-09-27 11:07:27 | INFO     | main_pipeline.TradebookPipeline:prepare_data_for_peak_detection:786 - Features prepared: (272538, 18), Labels: (272538,)
+2025-09-27 11:07:27 | INFO     | main_pipeline.TradebookPipeline:prepare_data_for_peak_detection:788 - Value counts of 'is_peak' after labeling:
+is_peak
+0    258942
+1     13596
+Name: count, dtype: int64
+2025-09-27 11:07:27 | INFO     | main_pipeline.TradebookPipeline:prepare_data_for_peak_detection:789 - Feature columns: ['price', 'amount', 'price_rolling_mean_5', 'price_rolling_std_5', 'price_rolling_max_5', 'price_rolling_min_5', 'price_pct_change', 'price_zscore', 'amount_rolling_mean_5', 'amount_rolling_std_5', 'amount_rolling_max_5', 'amount_rolling_min_5', 'amount_pct_change', 'amount_zscore', 'hour', 'day_of_week', 'is_weekend', 'month']
+2025-09-27 11:07:27 | INFO     | peak_estimators.strategies.ml_estimator:predict:165 - Predicting with ML estimator (RandomForestClassifier) on 272538 samples...
+2025-09-27 11:07:29 | DEBUG    | peak_estimators.strategies.ml_estimator:predict:172 - Applied custom prediction threshold (0.5) to probabilities for RandomForestClassifier.
+2025-09-27 11:07:29 | INFO     | peak_estimators.strategies.ml_estimator:predict:186 - ML prediction completed for 272538 samples. Found 0 peaks.
+2025-09-27 11:07:29 | INFO     | peak_estimators.strategies.ml_estimator:predict_proba:211 - Predicting probabilities with ML estimator (RandomForestClassifier) on 272538 samples...
+2025-09-27 11:07:30 | INFO     | peak_estimators.strategies.ml_estimator:predict_proba:218 - ML probability prediction completed for 272538 samples.
+2025-09-27 11:07:30 | INFO     | main_pipeline.TradebookPipeline:run_inference:860 - Probabilities also generated and included in output for random_forest_v1.
+2025-09-27 11:07:31 | INFO     | main_pipeline.TradebookPipeline:run_inference:875 - Inference completed. Found 0 peaks. Data saved to data\predictions\predictions_random_forest_v1_20250927_110730.parquet
+2025-09-27 11:07:31 | INFO     | main_pipeline.TradebookPipeline:evaluate_performance:885 - Evaluating performance for: random_forest_v1
+2025-09-27 11:07:31 | INFO     | main_pipeline.TradebookPipeline:evaluate_performance:898 - Found 'predicted_proba' column for random_forest_v1.
+2025-09-27 11:07:32 | INFO     | peak_estimators.evaluation.metrics:evaluate_peak_detection:102 - Peak detection evaluation completed.
+2025-09-27 11:07:32 | INFO     | main_pipeline.TradebookPipeline:evaluate_performance:912 - Evaluation metrics:
+{
+  "random_forest_v1_accuracy": 0.9501133786848073,
+  "random_forest_v1_precision": 0.0,
+  "random_forest_v1_recall": 0.0,
+  "random_forest_v1_f1_score": 0.0,
+  "random_forest_v1_true_positives": 0,
+  "random_forest_v1_false_positives": 0,
+  "random_forest_v1_true_negatives": 258942,
+  "random_forest_v1_false_negatives": 13596,
+  "random_forest_v1_specificity": 1.0,
+  "random_forest_v1_roc_auc": 0.6063765700333956,
+  "random_forest_v1_pr_auc": 0.0930128535675866
+}
+2025-09-27 11:07:32 | INFO     | main_pipeline.TradebookPipeline:evaluate_performance:922 - Evaluation report saved to reports\peak_detection_metrics.json
+2025-09-27 11:07:32 | INFO     | __main__:_validate_trained_models:541 - ✓ random_forest_v1: 0 peaks in 272538 samples (0.00%)
+2025-09-27 11:07:32 | INFO     | __main__:_validate_trained_models:511 - Validating estimator: gradient_boosting_v1
+2025-09-27 11:07:32 | INFO     | main_pipeline.TradebookPipeline:run_inference:834 - Running inference with estimator: gradient_boosting_v1
+2025-09-27 11:07:32 | INFO     | peak_estimators.strategies.base_estimator:__init__:16 - BasePeakEstimator initialized.
+2025-09-27 11:07:32 | INFO     | peak_estimators.strategies.ml_estimator:__init__:98 - MLEstimator __init__: Comparison check - is 'GradientBoostingClassifier' == 'RandomForestClassifier'? False
+2025-09-27 11:07:32 | INFO     | peak_estimators.strategies.ml_estimator:__init__:99 - MLEstimator __init__: Comparison check - is 'GradientBoostingClassifier' == 'GradientBoostingClassifier'? True
+2025-09-27 11:07:32 | INFO     | peak_estimators.strategies.ml_estimator:__init__:107 - MLEstimator __init__: Instantiated GradientBoostingClassifier.
+2025-09-27 11:07:32 | INFO     | peak_estimators.strategies.ml_estimator:__init__:121 - MLEstimator initialized with config: {'enabled': True, 'type': 'ml_estimator', 'model_type': 'GradientBoostingClassifier', 'params': {'n_estimators': 100, 'learning_rate': 0.1, 'max_depth': 6, 'random_state': 42}}
+2025-09-27 11:07:32 | INFO     | peak_estimators.estimator_factory:create_estimator:69 - Created new instance of 'ml_estimator' for estimator 'gradient_boosting_v1'.
+2025-09-27 11:07:32 | INFO     | peak_estimators.strategies.ml_estimator:load_model:313 - ML model weights loaded from models\peak_detection\gradient_boosting_v1\model_weights.joblib
+2025-09-27 11:07:32 | INFO     | peak_estimators.strategies.ml_estimator:load_model:323 - ML estimator model and configuration loaded from models\peak_detection\gradient_boosting_v1
+2025-09-27 11:07:32 | INFO     | peak_estimators.estimator_factory:load_estimator:98 - Estimator 'gradient_boosting_v1' loaded successfully from models\peak_detection\gradient_boosting_v1.
+2025-09-27 11:07:32 | INFO     | main_pipeline.TradebookPipeline:prepare_data_for_peak_detection:754 - Preparing data for peak detection...
+2025-09-27 11:07:32 | INFO     | main_pipeline.TradebookPipeline:prepare_data_for_peak_detection:759 - Feature columns before engineering lags diff: ['date', 'price', 'amount', 'is_peak', 'type_encoded', 'hour', 'day_of_week', 'is_weekend', 'month', 'price_rolling_mean_5', 'price_rolling_std_5', 'price_rolling_max_5', 'price_rolling_min_5', 'price_pct_change', 'price_zscore', 'amount_rolling_mean_5', 'amount_rolling_std_5', 'amount_rolling_max_5', 'amount_rolling_min_5', 'amount_pct_change', 'amount_zscore']
+2025-09-27 11:07:32 | INFO     | main_pipeline.TradebookPipeline:prepare_data_for_peak_detection:786 - Features prepared: (272538, 18), Labels: (272538,)
+2025-09-27 11:07:32 | INFO     | main_pipeline.TradebookPipeline:prepare_data_for_peak_detection:788 - Value counts of 'is_peak' after labeling:
+is_peak
+0    258942
+1     13596
+Name: count, dtype: int64
+2025-09-27 11:07:32 | INFO     | main_pipeline.TradebookPipeline:prepare_data_for_peak_detection:789 - Feature columns: ['price', 'amount', 'price_rolling_mean_5', 'price_rolling_std_5', 'price_rolling_max_5', 'price_rolling_min_5', 'price_pct_change', 'price_zscore', 'amount_rolling_mean_5', 'amount_rolling_std_5', 'amount_rolling_max_5', 'amount_rolling_min_5', 'amount_pct_change', 'amount_zscore', 'hour', 'day_of_week', 'is_weekend', 'month']
+2025-09-27 11:07:32 | INFO     | peak_estimators.strategies.ml_estimator:predict:165 - Predicting with ML estimator (GradientBoostingClassifier) on 272538 samples...
+2025-09-27 11:07:32 | DEBUG    | peak_estimators.strategies.ml_estimator:predict:172 - Applied custom prediction threshold (0.5) to probabilities for GradientBoostingClassifier.
+2025-09-27 11:07:32 | INFO     | peak_estimators.strategies.ml_estimator:predict:186 - ML prediction completed for 272538 samples. Found 20 peaks.
+2025-09-27 11:07:32 | INFO     | peak_estimators.strategies.ml_estimator:predict_proba:211 - Predicting probabilities with ML estimator (GradientBoostingClassifier) on 272538 samples...
+2025-09-27 11:07:33 | INFO     | peak_estimators.strategies.ml_estimator:predict_proba:218 - ML probability prediction completed for 272538 samples.
+2025-09-27 11:07:33 | INFO     | main_pipeline.TradebookPipeline:run_inference:860 - Probabilities also generated and included in output for gradient_boosting_v1.
+2025-09-27 11:07:33 | INFO     | main_pipeline.TradebookPipeline:run_inference:875 - Inference completed. Found 20 peaks. Data saved to data\predictions\predictions_gradient_boosting_v1_20250927_110733.parquet
+2025-09-27 11:07:33 | INFO     | main_pipeline.TradebookPipeline:evaluate_performance:885 - Evaluating performance for: gradient_boosting_v1
+2025-09-27 11:07:33 | INFO     | main_pipeline.TradebookPipeline:evaluate_performance:898 - Found 'predicted_proba' column for gradient_boosting_v1.
+2025-09-27 11:07:34 | INFO     | peak_estimators.evaluation.metrics:evaluate_peak_detection:102 - Peak detection evaluation completed.
+2025-09-27 11:07:34 | INFO     | main_pipeline.TradebookPipeline:evaluate_performance:912 - Evaluation metrics:
+{
+  "gradient_boosting_v1_accuracy": 0.9501867629468185,
+  "gradient_boosting_v1_precision": 1.0,
+  "gradient_boosting_v1_recall": 0.0014710208884966167,
+  "gradient_boosting_v1_f1_score": 0.002937720329024677,
+  "gradient_boosting_v1_true_positives": 20,
+  "gradient_boosting_v1_false_positives": 0,
+  "gradient_boosting_v1_true_negatives": 258942,
+  "gradient_boosting_v1_false_negatives": 13576,
+  "gradient_boosting_v1_specificity": 1.0,
+  "gradient_boosting_v1_roc_auc": 0.5829764672401998,
+  "gradient_boosting_v1_pr_auc": 0.10024328214694828
+}
+2025-09-27 11:07:34 | INFO     | main_pipeline.TradebookPipeline:evaluate_performance:922 - Evaluation report saved to reports\peak_detection_metrics.json
+2025-09-27 11:07:34 | INFO     | __main__:_validate_trained_models:541 - ✓ gradient_boosting_v1: 20 peaks in 272538 samples (0.01%)
+2025-09-27 11:07:34 | INFO     | __main__:_validate_trained_models:558 - Model validation completed.
+2025-09-27 11:07:34 | INFO     | __main__:execute_training_step:342 - ✓ Step completed successfully: validate_trained_models
+2025-09-27 11:07:34 | INFO     | __main__:train_complete_pipeline:479 - ============================================================
+2025-09-27 11:07:34 | INFO     | __main__:train_complete_pipeline:480 - 🎉 Training Pipeline Completed Successfully!
+2025-09-27 11:07:34 | INFO     | __main__:train_complete_pipeline:481 - ⏱️ Total Duration: 0:08:24.629227
+2025-09-27 11:07:34 | INFO     | __main__:train_complete_pipeline:482 - 📊 Steps Completed: 6
+2025-09-27 11:07:34 | INFO     | __main__:train_complete_pipeline:483 - ============================================================
+2025-09-27 11:07:34 | INFO     | __main__:_save_training_summary:578 - Training summary saved to reports\training_summary.json
+2025-09-27 11:07:34 | INFO     | __main__:main:634 - 🎉 Training completed successfully!

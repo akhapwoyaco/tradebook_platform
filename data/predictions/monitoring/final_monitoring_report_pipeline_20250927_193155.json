@@ -1,0 +1,65 @@
+{
+  "ingestion_metrics": {
+    "total_attempts": 18,
+    "successful_ingestions": 17,
+    "failed_ingestions": 1,
+    "retry_attempts": 0,
+    "last_success_time": "2025-09-27 19:49:26.964410",
+    "last_failure_time": "2025-09-27 19:50:59.413547",
+    "consecutive_failures": 1,
+    "ingestion_durations": [
+      29.273587226867676,
+      11.060632228851318,
+      8.147437810897827,
+      6.91039776802063,
+      6.265146493911743,
+      7.581224679946899,
+      6.171438455581665,
+      9.616911172866821,
+      7.5397937297821045,
+      7.963670969009399,
+      7.652973651885986,
+      7.018937110900879,
+      5.787530183792114,
+      7.8404927253723145,
+      6.684694766998291,
+      6.8111114501953125,
+      7.104040145874023
+    ],
+    "failure_reasons": [
+      {
+        "timestamp": "2025-09-27 19:50:59.413547",
+        "source": "exchange",
+        "symbol": "BTC/USDT",
+        "error": "No data returned",
+        "error_type": "Exception"
+      }
+    ],
+    "live_trading_status": {
+      "timestamp": "2025-09-27T19:50:26.471086",
+      "portfolio_value": 9992.78639870289,
+      "total_return_pct": -0.07213601297109562,
+      "total_trades": 1,
+      "consecutive_errors": 0,
+      "max_drawdown_pct": 0.09990009990009639
+    },
+    "success_rate": 0.9444444444444444,
+    "avg_duration": 8.790001210044412
+  },
+  "pipeline_metrics": {
+    "pipeline_runs": 1,
+    "successful_runs": 1,
+    "failed_runs": 2,
+    "last_run_time": "2025-09-27 19:50:59.462317",
+    "average_run_duration": 1144.214951,
+    "run_durations": [
+      1144.214951
+    ],
+    "step_failures": {
+      "synthetic_data_generation": 1,
+      "live_trading_loop": 1
+    },
+    "success_rate": 0.3333333333333333
+  },
+  "system_health": "WARNING"
+}

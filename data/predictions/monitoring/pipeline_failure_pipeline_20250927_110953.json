@@ -1,0 +1,36 @@
+{
+  "pipeline_id": "pipeline_20250927_110953",
+  "failure_time": "2025-09-27T11:10:13.552508",
+  "error_message": "'function' object has no attribute 'retry_config'",
+  "error_type": "AttributeError",
+  "monitoring_summary": {
+    "ingestion_metrics": {
+      "total_attempts": 1,
+      "successful_ingestions": 1,
+      "failed_ingestions": 0,
+      "retry_attempts": 0,
+      "last_success_time": "2025-09-27 11:10:13.512693",
+      "last_failure_time": null,
+      "consecutive_failures": 0,
+      "ingestion_durations": [
+        19.935028076171875
+      ],
+      "failure_reasons": [],
+      "success_rate": 1.0,
+      "avg_duration": 19.935028076171875
+    },
+    "pipeline_metrics": {
+      "pipeline_runs": 1,
+      "successful_runs": 0,
+      "failed_runs": 1,
+      "last_run_time": null,
+      "average_run_duration": 0,
+      "run_durations": [],
+      "step_failures": {
+        "pipeline_execution": 1
+      },
+      "success_rate": 0.0
+    },
+    "system_health": "WARNING"
+  }
+}

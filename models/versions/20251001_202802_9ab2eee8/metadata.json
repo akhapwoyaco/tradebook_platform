@@ -1,0 +1,13 @@
+{
+  "version_id": "20251001_202802_9ab2eee8",
+  "timestamp": "2025-10-01 20:28:02.156508",
+  "model_name": "Advanced Rule-Based Estimator (multi_indicator)",
+  "model_type": "rule_based",
+  "training_samples": 0,
+  "performance_metrics": {},
+  "file_path": "models\\versions\\20251001_202802_9ab2eee8\\20251001_202802_9ab2eee8.dill",
+  "status": "pending",
+  "deployment_strategy": "shadow_mode",
+  "parent_version": null,
+  "validation_results": null
+}

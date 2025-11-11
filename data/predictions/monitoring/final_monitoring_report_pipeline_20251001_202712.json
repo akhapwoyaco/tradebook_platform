@@ -1,0 +1,39 @@
+{
+  "ingestion_metrics": {
+    "total_attempts": 2,
+    "successful_ingestions": 2,
+    "failed_ingestions": 0,
+    "retry_attempts": 0,
+    "last_success_time": "2025-10-01 20:28:17.250289",
+    "last_failure_time": null,
+    "consecutive_failures": 0,
+    "ingestion_durations": [
+      48.52052187919617,
+      11.511747121810913
+    ],
+    "failure_reasons": [],
+    "live_trading_status": {
+      "timestamp": "2025-10-01T20:28:05.738542",
+      "portfolio_value": 10000,
+      "total_return_pct": 0.0,
+      "total_trades": 0,
+      "consecutive_errors": 0,
+      "max_drawdown_pct": 0.0
+    },
+    "success_rate": 1.0,
+    "avg_duration": 30.01613450050354
+  },
+  "pipeline_metrics": {
+    "pipeline_runs": 1,
+    "successful_runs": 1,
+    "failed_runs": 0,
+    "last_run_time": "2025-10-01 20:28:50.645772",
+    "average_run_duration": 98.078608,
+    "run_durations": [
+      98.078608
+    ],
+    "step_failures": {},
+    "success_rate": 1.0
+  },
+  "system_health": "HEALTHY"
+}

@@ -1,0 +1,6 @@
+{
+  "name": "Advanced Rule-Based Estimator (multi_indicator)",
+  "strategy": "rule_based",
+  "parameters": {},
+  "features": []
+}

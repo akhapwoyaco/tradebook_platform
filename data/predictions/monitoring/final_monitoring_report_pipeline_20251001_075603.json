@@ -1,0 +1,33 @@
+{
+  "ingestion_metrics": {
+    "total_attempts": 2,
+    "successful_ingestions": 2,
+    "failed_ingestions": 0,
+    "retry_attempts": 0,
+    "last_success_time": "2025-10-01 07:57:38.896646",
+    "last_failure_time": null,
+    "consecutive_failures": 0,
+    "ingestion_durations": [
+      48.550872564315796,
+      15.942428588867188
+    ],
+    "failure_reasons": [],
+    "success_rate": 1.0,
+    "avg_duration": 32.24665057659149
+  },
+  "pipeline_metrics": {
+    "pipeline_runs": 1,
+    "successful_runs": 1,
+    "failed_runs": 1,
+    "last_run_time": "2025-10-01 07:57:46.981848",
+    "average_run_duration": 103.233002,
+    "run_durations": [
+      103.233002
+    ],
+    "step_failures": {
+      "synthetic_data_generation": 1
+    },
+    "success_rate": 0.5
+  },
+  "system_health": "WARNING"
+}

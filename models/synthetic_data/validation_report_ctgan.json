@@ -1,0 +1,70 @@
+{
+  "is_valid": true,
+  "issues": [],
+  "warnings": [
+    "Columns with NaN values: ['type']",
+    "Column 'price' has significantly different distribution (p=0.0000)",
+    "Column 'volume' has significantly different distribution (p=0.0000)",
+    "Column 'volume' mean differs by 239.0%",
+    "Column 'price_ma' has significantly different distribution (p=0.0000)",
+    "Column 'volume_ma' has significantly different distribution (p=0.0000)",
+    "Column 'volume_ma' mean differs by 29.9%",
+    "Column 'log_returns' has significantly different distribution (p=0.0000)",
+    "Column 'log_returns' mean differs by 43.9%",
+    "Column 'volatility' has significantly different distribution (p=0.0000)",
+    "Column 'volatility' mean differs by 24.0%",
+    "Column 'price_momentum' has significantly different distribution (p=0.0000)"
+  ],
+  "metrics": {
+    "distribution_similarity": {
+      "price": {
+        "ks_statistic": 0.08139812475976066,
+        "ks_pvalue": 4.015007133921309e-60,
+        "mean_diff_pct": 0.0006637129336013411,
+        "std_diff_pct": 4.875595216745187
+      },
+      "volume": {
+        "ks_statistic": 0.44034298866985155,
+        "ks_pvalue": 0.0,
+        "mean_diff_pct": 239.0189760692705,
+        "std_diff_pct": 36.746481078376505
+      },
+      "price_ma": {
+        "ks_statistic": 0.08407996769351861,
+        "ks_pvalue": 3.977806565043595e-64,
+        "mean_diff_pct": 0.0017083934233446218,
+        "std_diff_pct": 4.6161948961736545
+      },
+      "volume_ma": {
+        "ks_statistic": 0.2918807932019109,
+        "ks_pvalue": 0.0,
+        "mean_diff_pct": 29.92138392100079,
+        "std_diff_pct": 23.910284985051785
+      },
+      "log_returns": {
+        "ks_statistic": 0.34376583749748324,
+        "ks_pvalue": 0.0,
+        "mean_diff_pct": 43.937865457056,
+        "std_diff_pct": 0.5961852290064902
+      },
+      "volatility": {
+        "ks_statistic": 0.2613529162777076,
+        "ks_pvalue": 0.0,
+        "mean_diff_pct": 24.02257894669851,
+        "std_diff_pct": 20.87806923576377
+      },
+      "price_momentum": {
+        "ks_statistic": 0.18967046473742977,
+        "ks_pvalue": 0.0,
+        "mean_diff_pct": 9.69104524954603,
+        "std_diff_pct": 0.2520985439553854
+      },
+      "type": {
+        "ks_statistic": NaN,
+        "ks_pvalue": NaN,
+        "mean_diff_pct": NaN,
+        "std_diff_pct": NaN
+      }
+    }
+  }
+}

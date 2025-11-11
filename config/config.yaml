@@ -1,0 +1,557 @@
+# Consolidated Tradebook Pipeline Configuration
+# This file merges config.yaml and config_enhanced.yaml EXACTLY as provided
+# to maintain 100% backward compatibility and avoid breaking any integrations.
+
+# =============================================================================
+# SECTION 1: ROOT LEVEL FIELDS FROM config_enhanced.yaml (preserved exactly)
+# =============================================================================
+
+time_col_name: "date"
+entity_col_name: "type_encoded"
+event_cols:
+  - 'price'
+  - 'amount'
+  - 'type_encoded'
+
+paths:
+  raw_data_dir: "data/raw/"
+  synthetic_output_dir: "data/synthetic/datasets/"
+  predictions_dir: "data/predictions/"
+  models_dir: "models/"
+  logs_dir: "logs/"
+
+data_paths:
+  raw_data: "data/raw/sample_data.csv"
+  synthetic_output_dir: "data/synthetic/datasets/"
+  predictions_output_dir: "data/predictions/"
+
+synthetic_data_generation:
+  generation_mode: "local"
+  generator_model_type: "TimeGAN"
+  output_filename: "synthetic_tradebook_data.parquet"
+  training_params:
+    epochs: 100
+    batch_size: 128
+  timegan_params:
+    sequence_length: 24
+    hidden_dim: 24
+    gamma_param: 1.0
+    learning_rate: 0.001
+    noise_dim: 32
+    num_layers: 3
+  num_synthetic_samples: 1000
+
+peak_estimators:
+  estimators:
+    random_forest_v1:
+      enabled: true
+      type: "ml_estimator"
+      model_type: "RandomForestClassifier"
+      params:
+        n_estimators: 100
+        max_depth: 10
+        min_samples_split: 5
+        random_state: 42
+    gradient_boosting_v1:
+      enabled: true
+      type: "ml_estimator"
+      model_type: "GradientBoostingClassifier"
+      params:
+        n_estimators: 100
+        learning_rate: 0.1
+        max_depth: 6
+        random_state: 42
+  evaluation:
+    report_path: "reports/peak_detection_metrics.json"
+    cross_validation:
+      enabled: true
+      cv_folds: 5
+      scoring:
+        - "accuracy"
+        - "precision"
+        - "recall"
+        - "f1"
+
+system_characteristics:
+  pumps:
+    pump_A:
+      nominal_pressure_bar: 10.0
+      flow_rate_normal_range: [60.0, 80.0]
+    pump_B:
+      nominal_pressure_bar: 12.0
+      flow_rate_normal_range: [65.0, 85.0]
+
+# =============================================================================
+# SECTION 2: ALL SECTIONS FROM config.yaml (preserved exactly)
+# =============================================================================
+
+# --- Global Pipeline Schema and Path Definitions ---
+
+# Defines the canonical names for key columns in all datasets.
+data_schema:
+  time_col_name: "date"
+  entity_col_name: "type_encoded"
+  event_cols:
+    - 'price'
+    - 'amount'
+    - 'type_encoded'
+
+# Centralized management of all file paths and directories.
+# NOTE: This duplicates the paths above but preserves both for compatibility
+config_paths:
+  raw_data_dir: "data/raw/"
+  synthetic_output_dir: "data/synthetic/datasets/"
+  predictions_dir: "data/predictions/"
+  models_dir: "models/"
+  logs_dir: "logs/"
+  
+# Specific file paths used by the pipeline components.
+config_data_paths:
+  raw_data: "data/raw/sample_data.csv"
+  predictions_output_dir: "data/predictions/"
+
+# --- Data Ingestion Layer Configuration ---
+data_ingestion:
+  # Data source mappings - maps source names to source types
+  data_sources:
+    binance: "binance"
+    kraken: "kraken"
+    coinbase: "coinbasepro"
+    # local: "local_file"
+    # gdrive: "google_drive"
+  
+  # List of tokens to monitor with their sources
+  tokens_to_monitor:
+    - symbol: 'BTC/USDT'
+      source: 'binance'  # References data_sources mapping above
+      params:
+        timeframe: '1m'
+        limit: 1000
+    
+    - symbol: 'ETH/USDT'
+      source: 'kraken'  # References data_sources mapping above
+      params:
+        timeframe: '1m'
+        limit: 1000
+    
+    - symbol: 'KUCOIN/USDT'
+      source: 'gdrive'  # References data_sources mapping above
+      gdrive_config:
+        url: 'https://drive.google.com/drive/folders/1bUwFTrlhO0xNe3HmnZHzSZTPGoIWKr74'
+        sample_ratio: 0.00000001  # Download 1% of available files
+      # file_type: 'tradebook'  # Options: 'tradebook', 'orderbook'
+    
+    # Example of local file source
+    - symbol: 'DYP/USDT'
+      source: 'local'
+      file_type: 'orderbook'
+  
+  # Local file system configuration
+  local_data_path: 'data/raw'
+  
+  # Google Drive configuration
+  google_drive:
+    enabled: false
+    default_url: 'https://drive.google.com/drive/folders/1bUwFTrlhO0xNe3HmnZHzSZTPGoIWKr74'
+    default_sample_ratio: 0.0001  # Default to 0.1% sampling
+    # Optional: Add authentication if needed for private folders
+    # use_cookies: false
+    # quiet_mode: false
+
+# Exchange API Configuration
+# Add API credentials here if needed for private endpoints
+exchanges:
+  binance:
+    apiKey: ''  # Add your API key if needed
+    secret: ''  # Add your secret if needed
+    sandbox: false  # Set to true for testing
+    rateLimit: 1200
+    enableRateLimit: true
+    timeout: 30000
+  
+  kraken:
+    apiKey: ''
+    secret: ''
+    sandbox: false
+    rateLimit: 1000
+    enableRateLimit: true
+    timeout: 30000
+  
+  coinbasepro:
+    apiKey: ''
+    secret: ''
+    passphrase: ''  # Coinbase requires passphrase
+    sandbox: false
+    rateLimit: 1000
+    enableRateLimit: true
+    timeout: 30000
+
+# --- Data Processing & Feature Engineering ---
+data_processing:
+  # The window size for calculating moving averages and other rolling features.
+  time_window_minutes: 60
+  # List of features to include/exclude.
+  features_to_include:
+    - 'volatility'
+    - 'volume_profile'
+    - 'lagged_price'
+    - 'price_change'
+  
+  # Data quality settings
+  remove_duplicates: true
+  handle_missing_data: true
+  outlier_detection: true
+  outlier_threshold: 3.0  # Standard deviations
+
+# --- Core Analysis & Model Layer ---
+core_analysis:
+  # A list of tools to enable for peak detection.
+  # This allows for easy swapping between different models or rule-based strategies.
+  enabled_tools:
+    - name: 'ml_estimator_rf'
+      type: 'ml_estimator'
+      model_type: 'RandomForestClassifier'
+      params:
+        n_estimators: 100
+        max_depth: 10
+        random_state: 42
+    
+    - name: 'rule_based_peaks'
+      type: 'rule_based_estimator'
+      params:
+        threshold_multiplier: 1.5
+  
+  # Model training parameters
+  train_test_split: 0.8
+  cross_validation_folds: 5
+  model_save_path: 'models/trained'
+
+  # Evaluation and Cross-Validation settings
+  evaluation:
+    report_path: "reports/peak_detection_metrics.json"
+    cross_validation:
+      enabled: true
+      cv_folds: 5
+      scoring:
+        - "accuracy"
+        - "precision"
+        - "recall"
+        - "f1"
+
+# Original peak_estimators from config.yaml (different structure)
+original_peak_estimators:
+  strategy: 'ensemble'  # Best option for robust detection
+  rule_based: 
+    algorithm: 'multi_indicator'
+    rsi_threshold: 50
+    peak_threshold: 0.1
+    prominence_base: 0.3
+    height: None
+
+# --- Synthetic Data Generation ---
+
+# 
+# # Generator-specific parameters from the enhanced config
+# generation_mode: "local"
+# generator_model_type: "TimeGAN"
+# output_filename: "synthetic_tradebook_data.parquet"
+# num_synthetic_samples: 1000
+# 
+# # Training parameters
+# training_params:
+#   epochs: 100
+#   batch_size: 128
+# timegan_params:
+#   sequence_length: 24
+#   hidden_dim: 24
+#   gamma_param: 1.0
+#   learning_rate: 0.001
+#   noise_dim: 32
+#   num_layers: 3
+
+
+
+# =============================================================================
+# UNIFIED SYNTHETIC DATA CONFIGURATION
+# =============================================================================
+synthetic_data:
+  # Core settings
+  enabled: true
+  generator_model_type: 'CTGAN'#Gaussian'  # Options: 'Gaussian', 'CTGAN', 'TimeGAN'
+  
+  model_name: 'CTGAN'  # Can be a more complex model
+  # Path where the trained generator model will be saved
+  model_path: 'models/synthetic_data/ctgan_model.pkl'
+
+  # Generation parameters
+  num_sequences: 1000  # Number of sequences to generate
+  seq_len: 24  # Samples per sequence
+  
+  # Feature columns - LEAVE EMPTY for auto-detection from data
+  # This prevents the "type not in index" error
+  feature_cols: []  # Auto-detect mode - recommended
+  
+  # Training parameters
+  training_params:
+    epochs: 100
+    batch_size: 128
+    learning_rate: 0.001
+    model_save_path: 'models/synthetic_data/'
+  
+  # TimeGAN specific parameters (only used if generator_model_type: 'TimeGAN')
+  timegan_params:
+    sequence_length: 24
+    hidden_dim: 24
+    gamma_param: 1.0
+    noise_dim: 32
+    num_layers: 3
+  
+  # Augmentation settings
+  augmentation:
+    enabled: false
+    noise_type: 'gaussian'  # Options: 'gaussian', 'uniform'
+    noise_level: 0.01
+    apply_to_columns: []  # Empty = all numeric columns
+  
+  # Validation and quality control
+  validation:
+    enabled: true
+    max_mean_diff_pct: 20  # Maximum acceptable mean difference %
+    max_std_diff_pct: 25   # Maximum acceptable std difference %
+    min_ks_pvalue: 0.01    # Minimum p-value for distribution similarity
+  
+  # Quality benchmarking
+  benchmarking:
+    enabled: true
+    save_reports: true
+    report_path: 'reports/synthetic_data/'
+    metrics:
+      - 'distribution_similarity'
+      - 'statistical_fidelity'
+      - 'correlation_preservation'
+  
+  # Output settings
+  output_filename: "synthetic_tradebook_data.parquet"
+  output_directory: "data/synthetic/datasets/"
+
+
+# --- Backtesting Simulation ---
+simulations:
+  enabled: true
+  initial_capital: 100000  # Starting capital for the simulation ($)
+  
+  # Trading parameters
+  transaction_costs: 0.001  # 0.1% per trade
+  slippage: 0.0005  # 0.05% slippage
+  max_position_size: 0.1  # Maximum 10% of capital per position
+  
+  # Risk management
+  stop_loss: 0.02  # 2% stop loss
+  take_profit: 0.05  # 5% take profit
+  
+  # Backtesting period
+  backtest_days: 365  # Days to backtest
+  
+  # Output settings
+  results_path: 'results/backtests'
+  save_trades: true
+  save_metrics: true
+
+# --- Live Trading Simulation ---
+live_trading:
+  enabled: true
+  exchange: 'binance'  # The exchange to connect to for live data
+  update_interval_seconds: 5  # Frequency of data fetches in seconds
+  symbol: 'BTC/USDT'
+  initial_capital: 10000
+  polling_interval: 60
+  
+  # Performance tracking
+  save_trades: true
+  save_performance: true
+  performance_update_interval: 60  # 5 minutes
+  output_directory: "./trading_outputs"
+  
+  # Risk management
+  max_position_size: 0.8  # 80% of capital
+  transaction_fee_rate: 0.001  # 0.1%
+  stop_loss_threshold: 0.05  # 5%
+  min_trade_interval_seconds: 30
+  max_consecutive_errors: 5
+  
+  # Monitoring alerts
+  monitoring:
+    log_interval_seconds: 30
+    alert_on_drawdown_pct: 10
+    alert_on_consecutive_errors: 1
+    export_trades_interval_minutes: 1
+    
+  realtime_performance: True,
+  realtime_status: True, 
+  status_update_interval: 30,    # Update every 30 seconds
+  continuous_export: True,
+  export_batch_size: 1           # Export every 5 trades
+
+  # Safety parameters
+  paper_trading: true  # Set to false for real trading (BE CAREFUL!)
+  max_daily_loss: 1000  # Maximum daily loss in USD
+  max_position_value: 5000  # Maximum position value in USD
+  
+  # Alert settings
+  enable_alerts: true
+  alert_methods: ['log', 'email']  # Options: 'log', 'email', 'slack'
+  
+  # Email configuration (if alerts enabled)
+  email:
+    smtp_server: ''
+    smtp_port: 587
+    username: ''
+    password: ''
+    to_address: ''
+
+# --- Logging Configuration ---
+logging:
+  level: 'INFO'  # Options: DEBUG, INFO, WARNING, ERROR, CRITICAL
+  log_to_file: true
+  log_file_path: 'logs/pipeline.log'
+  log_rotation: true
+  max_log_size_mb: 100
+  backup_count: 5
+  
+  # Console output
+  console_output: true
+  colorize_console: true
+
+# --- General Pipeline Settings ---
+pipeline:
+  # Parallel processing
+  enable_multiprocessing: true
+  max_workers: 4
+  
+  # Data caching
+  enable_caching: true
+  cache_directory: 'cache'
+  cache_expiry_hours: 24
+  
+  # Performance monitoring
+  enable_profiling: false
+  profiling_output: 'performance/profiles'
+  
+  # Cleanup settings
+  auto_cleanup_temp_files: true
+  cleanup_interval_hours: 6
+      
+# Add this section to your existing config.yaml
+
+# =============================================================================
+# MODEL RETRAINING & CONTINUOUS LEARNING CONFIGURATION
+# =============================================================================
+
+model_retraining:
+  enabled: true
+  
+  # Triggers for automated retraining
+  triggers:
+    # Performance degradation trigger
+    performance_degradation:
+      enabled: true
+      accuracy_threshold: 0.70          # Retrain if accuracy drops below 70%
+      lookback_trades: 100               # Evaluate last 100 trades
+      min_trades_for_eval: 50            # Need at least 50 trades before evaluating
+    
+    # Time-based trigger
+    time_based:
+      enabled: true
+      interval_hours: 24                 # Retrain every 24 hours
+    
+    # Data accumulation trigger  
+    data_accumulation:
+      enabled: true
+      min_new_samples: 500               # Retrain when 500 new samples accumulated
+      max_buffer_samples: 10000          # Maximum samples to keep in buffer
+  
+  # Model deployment strategy
+  deployment:
+    strategy: "shadow_mode"              # Options: "immediate", "shadow_mode", "a_b_test"
+    validation_trades: 50                # Trades to validate shadow model before promotion
+    rollback_threshold: 0.05             # Rollback if performance drops >5%
+    enable_ab_testing: false             # Enable A/B testing between models
+    ab_test_duration_hours: 12           # Duration for A/B testing
+  
+  # Performance monitoring configuration
+  monitoring:
+    lookback_trades: 100                 # Number of recent trades to analyze
+    burn_in_trades: 50                   # Trades before setting baseline metrics
+    
+    # Metrics to track
+    metrics:
+      - "prediction_accuracy"
+      - "precision"
+      - "recall"
+      - "f1_score"
+      - "win_rate"
+      - "false_positive_rate"
+      - "false_negative_rate"
+      - "avg_return_correct"
+      - "avg_return_incorrect"
+      - "execution_latency_ms"
+      - "slippage_pct"
+      - "confidence_calibration"
+    
+    # Alert thresholds
+    alert_thresholds:
+      accuracy_drop: 0.10                # Alert if accuracy drops 10%
+      latency_increase: 2.0              # Alert if latency doubles
+      slippage_threshold: 0.02           # Alert if slippage exceeds 2%
+      consecutive_errors: 5              # Alert after 5 consecutive errors
+    
+    # Distribution drift detection
+    drift_detection:
+      enabled: true
+      method: "ks_test"                  # Kolmogorov-Smirnov test
+      significance_level: 0.05           # P-value threshold for drift
+      min_samples: 100                   # Minimum samples for drift detection
+  
+  # Dashboard configuration
+  dashboard:
+    enabled: true
+    auto_refresh_seconds: 30             # Dashboard auto-refresh interval
+    output_directory: "./monitoring/dashboards"
+    save_history: true
+    history_retention_days: 30           # Keep dashboard history for 30 days
+    
+    # Dashboard features
+    features:
+      - "performance_metrics"
+      - "retraining_timeline"
+      - "drift_detection"
+      - "execution_quality"
+      - "model_confidence"
+      - "trade_outcomes"
+      - "system_health"
+  
+  # Model versioning
+  versioning:
+    save_all_versions: true              # Save every trained model
+    max_versions_per_model: 20           # Keep last 20 versions
+    compression: true                    # Compress old model versions
+    metadata_tracking: true              # Track full metadata for each version
+  
+  # Retraining schedule (optional cron-like)
+  schedule:
+    enabled: false
+    cron_expression: "0 2 * * *"         # Run at 2 AM daily (if time_based disabled)
+  
+  # Safety and validation
+  safety:
+    min_training_samples: 100            # Minimum samples required for retraining
+    max_retrain_frequency_hours: 1       # Prevent retraining more than once per hour
+    require_validation: true             # Require validation before deployment
+    enable_rollback: true                # Enable automatic rollback on failure
+    
+  # Output paths
+  paths:
+    performance_data: "./monitoring/performance"
+    retraining_logs: "./logs/retraining"
+    model_registry: "./models/registry"
+    

@@ -1,0 +1,508 @@
+{
+  "pipeline_id": "pipeline_20251001_202712",
+  "checkpoint_name": "pipeline_complete",
+  "timestamp": "2025-10-01T20:28:50.655951",
+  "monitoring_data": {
+    "ingestion_metrics": {
+      "total_attempts": 2,
+      "successful_ingestions": 2,
+      "failed_ingestions": 0,
+      "retry_attempts": 0,
+      "last_success_time": "2025-10-01 20:28:17.250289",
+      "last_failure_time": null,
+      "consecutive_failures": 0,
+      "ingestion_durations": [
+        48.52052187919617,
+        11.511747121810913
+      ],
+      "failure_reasons": [],
+      "live_trading_status": {
+        "timestamp": "2025-10-01T20:28:05.738542",
+        "portfolio_value": 10000,
+        "total_return_pct": 0.0,
+        "total_trades": 0,
+        "consecutive_errors": 0,
+        "max_drawdown_pct": 0.0
+      },
+      "success_rate": 1.0,
+      "avg_duration": 30.01613450050354
+    },
+    "pipeline_metrics": {
+      "pipeline_runs": 1,
+      "successful_runs": 1,
+      "failed_runs": 0,
+      "last_run_time": "2025-10-01 20:28:50.645772",
+      "average_run_duration": 98.078608,
+      "run_durations": [
+        98.078608
+      ],
+      "step_failures": {},
+      "success_rate": 1.0
+    },
+    "system_health": "HEALTHY"
+  },
+  "config_snapshot": {
+    "time_col_name": "date",
+    "entity_col_name": "type_encoded",
+    "event_cols": [
+      "price",
+      "amount",
+      "type_encoded"
+    ],
+    "paths": {
+      "raw_data_dir": "data/raw/",
+      "synthetic_output_dir": "data/synthetic/datasets/",
+      "predictions_dir": "data/predictions/",
+      "models_dir": "models/",
+      "logs_dir": "logs/"
+    },
+    "data_paths": {
+      "raw_data": "data/raw/sample_data.csv",
+      "synthetic_output_dir": "data/synthetic/datasets/",
+      "predictions_output_dir": "data/predictions/"
+    },
+    "synthetic_data_generation": {
+      "generation_mode": "local",
+      "generator_model_type": "TimeGAN",
+      "output_filename": "synthetic_tradebook_data.parquet",
+      "training_params": {
+        "epochs": 100,
+        "batch_size": 128
+      },
+      "timegan_params": {
+        "sequence_length": 24,
+        "hidden_dim": 24,
+        "gamma_param": 1.0,
+        "learning_rate": 0.001,
+        "noise_dim": 32,
+        "num_layers": 3
+      },
+      "num_synthetic_samples": 1000
+    },
+    "peak_estimators": {
+      "estimators": {
+        "random_forest_v1": {
+          "enabled": true,
+          "type": "ml_estimator",
+          "model_type": "RandomForestClassifier",
+          "params": {
+            "n_estimators": 100,
+            "max_depth": 10,
+            "min_samples_split": 5,
+            "random_state": 42
+          }
+        },
+        "gradient_boosting_v1": {
+          "enabled": true,
+          "type": "ml_estimator",
+          "model_type": "GradientBoostingClassifier",
+          "params": {
+            "n_estimators": 100,
+            "learning_rate": 0.1,
+            "max_depth": 6,
+            "random_state": 42
+          }
+        }
+      },
+      "evaluation": {
+        "report_path": "reports/peak_detection_metrics.json",
+        "cross_validation": {
+          "enabled": true,
+          "cv_folds": 5,
+          "scoring": [
+            "accuracy",
+            "precision",
+            "recall",
+            "f1"
+          ]
+        }
+      }
+    },
+    "system_characteristics": {
+      "pumps": {
+        "pump_A": {
+          "nominal_pressure_bar": 10.0,
+          "flow_rate_normal_range": [
+            60.0,
+            80.0
+          ]
+        },
+        "pump_B": {
+          "nominal_pressure_bar": 12.0,
+          "flow_rate_normal_range": [
+            65.0,
+            85.0
+          ]
+        }
+      }
+    },
+    "data_schema": {
+      "time_col_name": "date",
+      "entity_col_name": "type_encoded",
+      "event_cols": [
+        "price",
+        "amount",
+        "type_encoded"
+      ]
+    },
+    "config_paths": {
+      "raw_data_dir": "data/raw/",
+      "synthetic_output_dir": "data/synthetic/datasets/",
+      "predictions_dir": "data/predictions/",
+      "models_dir": "models/",
+      "logs_dir": "logs/"
+    },
+    "config_data_paths": {
+      "raw_data": "data/raw/sample_data.csv",
+      "predictions_output_dir": "data/predictions/"
+    },
+    "data_ingestion": {
+      "data_sources": {
+        "binance": "binance",
+        "kraken": "kraken",
+        "coinbase": "coinbasepro"
+      },
+      "tokens_to_monitor": [
+        {
+          "symbol": "BTC/USDT",
+          "source": "binance",
+          "params": {
+            "timeframe": "1m",
+            "limit": 1000
+          }
+        },
+        {
+          "symbol": "ETH/USDT",
+          "source": "kraken",
+          "params": {
+            "timeframe": "1m",
+            "limit": 1000
+          }
+        },
+        {
+          "symbol": "KUCOIN/USDT",
+          "source": "gdrive",
+          "gdrive_config": {
+            "url": "https://drive.google.com/drive/folders/1bUwFTrlhO0xNe3HmnZHzSZTPGoIWKr74",
+            "sample_ratio": 1e-08
+          }
+        },
+        {
+          "symbol": "DYP/USDT",
+          "source": "local",
+          "file_type": "orderbook"
+        }
+      ],
+      "local_data_path": "data/raw",
+      "google_drive": {
+        "enabled": false,
+        "default_url": "https://drive.google.com/drive/folders/1bUwFTrlhO0xNe3HmnZHzSZTPGoIWKr74",
+        "default_sample_ratio": 0.0001
+      }
+    },
+    "exchanges": {
+      "binance": {
+        "apiKey": "",
+        "secret": "",
+        "sandbox": false,
+        "rateLimit": 1200,
+        "enableRateLimit": true,
+        "timeout": 30000
+      },
+      "kraken": {
+        "apiKey": "",
+        "secret": "",
+        "sandbox": false,
+        "rateLimit": 1000,
+        "enableRateLimit": true,
+        "timeout": 30000
+      },
+      "coinbasepro": {
+        "apiKey": "",
+        "secret": "",
+        "passphrase": "",
+        "sandbox": false,
+        "rateLimit": 1000,
+        "enableRateLimit": true,
+        "timeout": 30000
+      }
+    },
+    "data_processing": {
+      "time_window_minutes": 60,
+      "features_to_include": [
+        "volatility",
+        "volume_profile",
+        "lagged_price",
+        "price_change"
+      ],
+      "remove_duplicates": true,
+      "handle_missing_data": true,
+      "outlier_detection": true,
+      "outlier_threshold": 3.0
+    },
+    "core_analysis": {
+      "enabled_tools": [
+        {
+          "name": "ml_estimator_rf",
+          "type": "ml_estimator",
+          "model_type": "RandomForestClassifier",
+          "params": {
+            "n_estimators": 100,
+            "max_depth": 10,
+            "random_state": 42
+          }
+        },
+        {
+          "name": "rule_based_peaks",
+          "type": "rule_based_estimator",
+          "params": {
+            "threshold_multiplier": 1.5
+          }
+        }
+      ],
+      "train_test_split": 0.8,
+      "cross_validation_folds": 5,
+      "model_save_path": "models/trained",
+      "evaluation": {
+        "report_path": "reports/peak_detection_metrics.json",
+        "cross_validation": {
+          "enabled": true,
+          "cv_folds": 5,
+          "scoring": [
+            "accuracy",
+            "precision",
+            "recall",
+            "f1"
+          ]
+        }
+      }
+    },
+    "original_peak_estimators": {
+      "strategy": "ensemble",
+      "rule_based": {
+        "algorithm": "multi_indicator",
+        "rsi_threshold": 50,
+        "peak_threshold": 0.1,
+        "prominence_base": 0.3,
+        "height": "None"
+      }
+    },
+    "synthetic_data": {
+      "enabled": true,
+      "generator_model_type": "CTGAN",
+      "model_name": "CTGAN",
+      "model_path": "models/synthetic_data/ctgan_model.pkl",
+      "num_sequences": 1000,
+      "seq_len": 24,
+      "feature_cols": [],
+      "training_params": {
+        "epochs": 100,
+        "batch_size": 128,
+        "learning_rate": 0.001,
+        "model_save_path": "models/synthetic_data/"
+      },
+      "timegan_params": {
+        "sequence_length": 24,
+        "hidden_dim": 24,
+        "gamma_param": 1.0,
+        "noise_dim": 32,
+        "num_layers": 3
+      },
+      "augmentation": {
+        "enabled": false,
+        "noise_type": "gaussian",
+        "noise_level": 0.01,
+        "apply_to_columns": []
+      },
+      "validation": {
+        "enabled": true,
+        "max_mean_diff_pct": 20,
+        "max_std_diff_pct": 25,
+        "min_ks_pvalue": 0.01
+      },
+      "benchmarking": {
+        "enabled": true,
+        "save_reports": true,
+        "report_path": "reports/synthetic_data/",
+        "metrics": [
+          "distribution_similarity",
+          "statistical_fidelity",
+          "correlation_preservation"
+        ]
+      },
+      "output_filename": "synthetic_tradebook_data.parquet",
+      "output_directory": "data/synthetic/datasets/"
+    },
+    "simulations": {
+      "enabled": true,
+      "initial_capital": 100000,
+      "transaction_costs": 0.001,
+      "slippage": 0.0005,
+      "max_position_size": 0.1,
+      "stop_loss": 0.02,
+      "take_profit": 0.05,
+      "backtest_days": 365,
+      "results_path": "results/backtests",
+      "save_trades": true,
+      "save_metrics": true
+    },
+    "live_trading": {
+      "enabled": true,
+      "exchange": "binance",
+      "update_interval_seconds": 5,
+      "symbol": "BTC/USDT",
+      "initial_capital": 10000,
+      "polling_interval": 60,
+      "save_trades": true,
+      "save_performance": true,
+      "performance_update_interval": 60,
+      "output_directory": "./trading_outputs",
+      "max_position_size": 0.8,
+      "transaction_fee_rate": 0.001,
+      "stop_loss_threshold": 0.05,
+      "min_trade_interval_seconds": 30,
+      "max_consecutive_errors": 5,
+      "monitoring": {
+        "log_interval_seconds": 30,
+        "alert_on_drawdown_pct": 10,
+        "alert_on_consecutive_errors": 1,
+        "export_trades_interval_minutes": 1
+      },
+      "realtime_performance": "True,",
+      "realtime_status": "True,",
+      "status_update_interval": "30,",
+      "continuous_export": "True,",
+      "export_batch_size": 1,
+      "paper_trading": true,
+      "max_daily_loss": 1000,
+      "max_position_value": 5000,
+      "enable_alerts": true,
+      "alert_methods": [
+        "log",
+        "email"
+      ],
+      "email": {
+        "smtp_server": "",
+        "smtp_port": 587,
+        "username": "",
+        "password": "",
+        "to_address": ""
+      }
+    },
+    "logging": {
+      "level": "INFO",
+      "log_to_file": true,
+      "log_file_path": "logs/pipeline.log",
+      "log_rotation": true,
+      "max_log_size_mb": 100,
+      "backup_count": 5,
+      "console_output": true,
+      "colorize_console": true
+    },
+    "pipeline": {
+      "enable_multiprocessing": true,
+      "max_workers": 4,
+      "enable_caching": true,
+      "cache_directory": "cache",
+      "cache_expiry_hours": 24,
+      "enable_profiling": false,
+      "profiling_output": "performance/profiles",
+      "auto_cleanup_temp_files": true,
+      "cleanup_interval_hours": 6
+    },
+    "model_retraining": {
+      "enabled": true,
+      "triggers": {
+        "performance_degradation": {
+          "enabled": true,
+          "accuracy_threshold": 0.7,
+          "lookback_trades": 100,
+          "min_trades_for_eval": 50
+        },
+        "time_based": {
+          "enabled": true,
+          "interval_hours": 24
+        },
+        "data_accumulation": {
+          "enabled": true,
+          "min_new_samples": 500,
+          "max_buffer_samples": 10000
+        }
+      },
+      "deployment": {
+        "strategy": "shadow_mode",
+        "validation_trades": 50,
+        "rollback_threshold": 0.05,
+        "enable_ab_testing": false,
+        "ab_test_duration_hours": 12
+      },
+      "monitoring": {
+        "lookback_trades": 100,
+        "burn_in_trades": 50,
+        "metrics": [
+          "prediction_accuracy",
+          "precision",
+          "recall",
+          "f1_score",
+          "win_rate",
+          "false_positive_rate",
+          "false_negative_rate",
+          "avg_return_correct",
+          "avg_return_incorrect",
+          "execution_latency_ms",
+          "slippage_pct",
+          "confidence_calibration"
+        ],
+        "alert_thresholds": {
+          "accuracy_drop": 0.1,
+          "latency_increase": 2.0,
+          "slippage_threshold": 0.02,
+          "consecutive_errors": 5
+        },
+        "drift_detection": {
+          "enabled": true,
+          "method": "ks_test",
+          "significance_level": 0.05,
+          "min_samples": 100
+        }
+      },
+      "dashboard": {
+        "enabled": true,
+        "auto_refresh_seconds": 30,
+        "output_directory": "./monitoring/dashboards",
+        "save_history": true,
+        "history_retention_days": 30,
+        "features": [
+          "performance_metrics",
+          "retraining_timeline",
+          "drift_detection",
+          "execution_quality",
+          "model_confidence",
+          "trade_outcomes",
+          "system_health"
+        ]
+      },
+      "versioning": {
+        "save_all_versions": true,
+        "max_versions_per_model": 20,
+        "compression": true,
+        "metadata_tracking": true
+      },
+      "schedule": {
+        "enabled": false,
+        "cron_expression": "0 2 * * *"
+      },
+      "safety": {
+        "min_training_samples": 100,
+        "max_retrain_frequency_hours": 1,
+        "require_validation": true,
+        "enable_rollback": true
+      },
+      "paths": {
+        "performance_data": "./monitoring/performance",
+        "retraining_logs": "./logs/retraining",
+        "model_registry": "./models/registry"
+      }
+    }
+  }
+}

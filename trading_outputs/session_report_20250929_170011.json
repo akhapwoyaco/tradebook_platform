@@ -1,0 +1,37 @@
+{
+  "session_summary": {
+    "start_time": "2025-09-29T16:43:54.174966",
+    "end_time": "2025-09-29T17:00:11.402112",
+    "duration_minutes": 16.286766183333334,
+    "duration_hours": 0.27144610305555555,
+    "initial_capital": 10000,
+    "final_portfolio_value": 10049.01050700424,
+    "final_position": 0.08873859492577402,
+    "final_cash": 0.0,
+    "total_errors": 0
+  },
+  "performance_metrics": {
+    "total_trades": 1,
+    "successful_trades": 0,
+    "total_return": 0.004901050700423911,
+    "max_drawdown": 0.003083595197762132,
+    "sharpe_ratio": 0.3594419840155358,
+    "win_rate": 0,
+    "avg_trade_return": 0,
+    "volatility": 0.0013681490537159763,
+    "total_fees": 9.990009990009991
+  },
+  "all_trades": [
+    {
+      "timestamp": "2025-09-29T16:44:21.991839",
+      "action": "BUY",
+      "price": 112577.96,
+      "quantity": 0.08873859492577402,
+      "cash_after": 0.0,
+      "position_after": 0.08873859492577402,
+      "prediction": 20,
+      "confidence": 1.0,
+      "features_hash": "1189981051754446212"
+    }
+  ]
+}

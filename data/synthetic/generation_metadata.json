@@ -1,0 +1,68 @@
+{
+  "generator_type": "CTGAN",
+  "num_sequences": 1000,
+  "total_samples": 24000,
+  "feature_columns": [
+    "price",
+    "volume",
+    "price_ma",
+    "volume_ma",
+    "log_returns",
+    "volatility",
+    "price_momentum",
+    "type"
+  ],
+  "real_data_samples": 18211,
+  "generation_timestamp": "2025-10-01T20:28:03.257993",
+  "training_summary": {
+    "model_type": "CTGAN",
+    "is_trained": true,
+    "feature_columns": [
+      "price",
+      "volume",
+      "price_ma",
+      "volume_ma",
+      "log_returns",
+      "volatility",
+      "price_momentum",
+      "type"
+    ],
+    "sequence_length": 24,
+    "training_metadata": {
+      "n_samples": 18211,
+      "n_features": 8,
+      "feature_columns": [
+        "price",
+        "volume",
+        "price_ma",
+        "volume_ma",
+        "log_returns",
+        "volatility",
+        "price_momentum",
+        "type"
+      ],
+      "data_types": {
+        "price": "float64",
+        "volume": "float64",
+        "price_ma": "float64",
+        "volume_ma": "float64",
+        "log_returns": "float64",
+        "volatility": "float64",
+        "price_momentum": "float64",
+        "type": "float64"
+      },
+      "numeric_columns": [
+        "price",
+        "volume",
+        "price_ma",
+        "volume_ma",
+        "log_returns",
+        "volatility",
+        "price_momentum",
+        "type"
+      ],
+      "categorical_columns": []
+    },
+    "augmentation_enabled": false
+  }
+}

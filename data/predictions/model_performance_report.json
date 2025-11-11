@@ -1,0 +1,31 @@
+{
+  "Advanced Rule-Based Estimator (multi_indicator)": {
+    "accuracy": 1.0,
+    "precision": 1.0,
+    "recall": 1.0,
+    "confusion_matrix": {
+      "labels": [
+        "Not Peak",
+        "Peak"
+      ],
+      "matrix": [
+        [
+          12040,
+          0
+        ],
+        [
+          0,
+          6171
+        ]
+      ]
+    },
+    "evaluation_timestamp": "2025-10-01T20:28:02.139588",
+    "data_size": 18211
+  },
+  "evaluation_summary": {
+    "total_models": 1,
+    "successful_evaluations": 1,
+    "failed_evaluations": 0,
+    "evaluation_timestamp": "2025-10-01T20:28:02.139588"
+  }
+}

@@ -1,0 +1,28 @@
+# =============================================================================
+# Local Overrides for Docker Compose Development Environment
+# NOTE: This file inherits all settings from config.yaml
+# and only overrides necessary paths/flags for a local run.
+# =============================================================================
+
+# Override logging level for local debugging
+logging:
+  level: 'DEBUG'
+  log_to_file: false
+
+# Ensure local data paths are correct for the mounted volume
+paths:
+  raw_data_dir: "/app/data/raw/"
+  synthetic_output_dir: "/app/data/synthetic/datasets/"
+  predictions_dir: "/app/data/predictions/"
+  models_dir: "/app/models/"
+  logs_dir: "/app/logs/"
+
+# Set synthetic data mode to ensure local model is used
+synthetic_data_generation:
+  generation_mode: "local"
+
+# Disable real-time / resource-heavy components locally (optional)
+live_trading:
+  enabled: false
+  # Set to true to verify live trading logic without real risk
+  paper_trading: true

@@ -1,0 +1,21 @@
+# Assuming a standard Python base image for CPU-only tasks
+FROM python:3.10-slim
+
+# Set the working directory
+WORKDIR /app
+
+# Copy the dependency files first to leverage Docker caching
+COPY setup.py .
+# Assuming requirements.txt is a sibling to setup.py in the root
+COPY requirements.txt .
+
+# Install dependencies (use appropriate command if not requirements.txt)
+RUN pip install --no-cache-dir -r requirements.txt
+
+# Copy the rest of the application code
+COPY . /app
+
+# The main pipeline runs on CPU, typically for ingestion, processing, etc.
+# The entry point will be overridden by the docker-compose/K8s command
+# For a standard pipeline image, this might be a simple shell.
+ENTRYPOINT ["/bin/bash", "-c"]

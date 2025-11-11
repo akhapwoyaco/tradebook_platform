@@ -1,0 +1,78 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: synthetic-data-api-service
+  labels:
+    app: synthetic-data-api
+spec:
+  selector:
+    app: synthetic-data-api
+  ports:
+    - protocol: TCP
+      port: 5000
+      targetPort: 5000
+  type: ClusterIP # Change to LoadBalancer for external access
+
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: synthetic-data-api-deployment
+  labels:
+    app: synthetic-data-api
+spec:
+  replicas: 2 # Start with a minimum of 2 replicas for high availability
+  selector:
+    matchLabels:
+      app: synthetic-data-api
+  strategy:
+    type: RollingUpdate
+  template:
+    metadata:
+      labels:
+        app: synthetic-data-api
+    spec:
+      volumes:
+        # Volume to hold the pipeline configuration
+        - name: config-volume
+          configMap:
+            name: tradebook-pipeline-config # Name of the new ConfigMap (see below)
+      containers:
+        - name: synthetic-data-api
+          image: ${DOCKER_REGISTRY_PREFIX}tradebook_pipeline_gpu:${DOCKER_TAG}
+          imagePullPolicy: Always
+          ports:
+            - containerPort: 5000
+          # Inject config file path via environment variable
+          env:
+            - name: CONFIG_FILE_PATH
+              value: /etc/config/config.yaml
+          # Mount the configuration file from the ConfigMap
+          volumeMounts:
+            - name: config-volume
+              mountPath: /etc/config
+          # 1. Define Resource Requests and Limits
+          resources:
+            requests:
+              memory: "2Gi"
+              cpu: "1"
+              nvidia.com/gpu: 1 # Request 1 GPU
+            limits:
+              memory: "4Gi"
+              cpu: "2"
+              nvidia.com/gpu: 1 # Limit to 1 GPU
+          # 2. Add Probes for Health Checking
+          livenessProbe:
+            httpGet:
+              path: /health
+              port: 5000
+            initialDelaySeconds: 20
+            periodSeconds: 10
+            failureThreshold: 5
+          readinessProbe:
+            httpGet:
+              path: /ready
+              port: 5000
+            initialDelaySeconds: 5
+            periodSeconds: 5
+            failureThreshold: 3

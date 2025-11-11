@@ -1,0 +1,6 @@
+{
+  "error_type": "AttributeError",
+  "error_message": "'function' object has no attribute 'retry_config'",
+  "timestamp": "2025-09-27T11:10:13.554004",
+  "emergency_shutdown": true
+}

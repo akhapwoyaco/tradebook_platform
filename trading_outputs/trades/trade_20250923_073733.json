@@ -1,0 +1,11 @@
+{
+  "timestamp": "2025-09-23T07:37:33.147243",
+  "action": "BUY",
+  "price": 111986.41,
+  "quantity": 0.08920734212312002,
+  "cash_after": 0.0,
+  "position_after": 0.08920734212312002,
+  "prediction": 20,
+  "confidence": 1.0,
+  "features_hash": "321458093292180703"
+}

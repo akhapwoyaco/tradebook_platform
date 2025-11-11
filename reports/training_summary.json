@@ -1,0 +1,70 @@
+{
+    "start_time": "2025-09-27T10:59:09.577490",
+    "end_time": "2025-09-27T11:07:34.206717",
+    "steps_completed": [
+        "load_raw_data",
+        "preprocess_data",
+        "train_synthetic_generator",
+        "generate_synthetic_data",
+        "train_peak_estimators",
+        "validate_trained_models"
+    ],
+    "errors": [],
+    "data_shapes": {
+        "raw": [
+            272538,
+            4
+        ],
+        "processed": [
+            272538,
+            21
+        ],
+        "synthetic": [
+            1000,
+            21
+        ],
+        "combined": [
+            273538,
+            20
+        ]
+    },
+    "model_metrics": {
+        "random_forest_v1": {
+            "total_samples": 272538,
+            "predicted_peaks": 0,
+            "peak_ratio": 0.0,
+            "evaluation_metrics": {
+                "random_forest_v1_accuracy": 0.9501133786848073,
+                "random_forest_v1_precision": 0.0,
+                "random_forest_v1_recall": 0.0,
+                "random_forest_v1_f1_score": 0.0,
+                "random_forest_v1_true_positives": 0,
+                "random_forest_v1_false_positives": 0,
+                "random_forest_v1_true_negatives": 258942,
+                "random_forest_v1_false_negatives": 13596,
+                "random_forest_v1_specificity": 1.0,
+                "random_forest_v1_roc_auc": 0.6063765700333956,
+                "random_forest_v1_pr_auc": 0.0930128535675866
+            }
+        },
+        "gradient_boosting_v1": {
+            "total_samples": 272538,
+            "predicted_peaks": 20,
+            "peak_ratio": 7.338426201116908e-05,
+            "evaluation_metrics": {
+                "gradient_boosting_v1_accuracy": 0.9501867629468185,
+                "gradient_boosting_v1_precision": 1.0,
+                "gradient_boosting_v1_recall": 0.0014710208884966167,
+                "gradient_boosting_v1_f1_score": 0.002937720329024677,
+                "gradient_boosting_v1_true_positives": 20,
+                "gradient_boosting_v1_false_positives": 0,
+                "gradient_boosting_v1_true_negatives": 258942,
+                "gradient_boosting_v1_false_negatives": 13576,
+                "gradient_boosting_v1_specificity": 1.0,
+                "gradient_boosting_v1_roc_auc": 0.5829764672401998,
+                "gradient_boosting_v1_pr_auc": 0.10024328214694828
+            }
+        }
+    },
+    "overall_status": "success"
+}

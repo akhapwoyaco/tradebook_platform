@@ -1,0 +1,17 @@
+batch_size: 32
+epochs: 10
+features:
+- price
+- amount
+learning_rate: 0.001
+model_params:
+    max_depth: 10
+    min_samples_split: 5
+    n_estimators: 100
+    random_state: 42
+model_type: RandomForestClassifier
+model_weights_file: model_weights.joblib
+prediction_threshold: 0.5
+trained_on_features:
+- price
+- amount

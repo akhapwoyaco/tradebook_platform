@@ -1,0 +1,19 @@
+{
+  "timestamp": "2025-09-30T05:15:02.423404",
+  "action": "BUY",
+  "price": 114385.0,
+  "quantity": 0.06986937091408832,
+  "cash_after": 1999.999999999999,
+  "position_after": 0.06986937091408832,
+  "prediction": 22,
+  "confidence": null,
+  "features_hash": "925297549745550458",
+  "order_id": null,
+  "exchange_order_id": null,
+  "fill_price": 114385.0,
+  "slippage": null,
+  "execution_time_ms": null,
+  "order_status": "SIMULATED",
+  "partial_fills": null,
+  "retry_count": null
+}

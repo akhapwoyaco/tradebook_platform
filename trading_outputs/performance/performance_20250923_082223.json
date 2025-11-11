@@ -1,0 +1,19 @@
+{
+  "timestamp": "2025-09-23T08:22:23.991851",
+  "session_duration_minutes": 45.001498100000006,
+  "current_portfolio_value": 10048.22045696559,
+  "metrics": {
+    "total_trades": 1,
+    "successful_trades": 0,
+    "total_return": 0.004822045696558962,
+    "max_drawdown": 0.0011085168213760906,
+    "sharpe_ratio": 0.4176659062871389,
+    "win_rate": 0,
+    "avg_trade_return": 0,
+    "volatility": 0.00034793358822027466,
+    "total_fees": 9.990009990009991
+  },
+  "recent_trades": 1,
+  "error_count": 0,
+  "consecutive_errors": 0
+}

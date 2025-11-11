@@ -1,0 +1,18 @@
+# This file allows you to manage your application configuration separately from the deployment logic.
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: tradebook-pipeline-config
+  labels:
+    app: tradebook-pipeline
+data:
+  # The key here must match the file path used in the Deployment volumeMounts
+  config.yaml: |
+    # Paste the ENTIRE contents of your consolidated config.yaml here.
+    # Alternatively, have your CI/CD pipeline generate this dynamically.
+    
+    # --- Start of config.yaml content paste ---
+    time_col_name: "date"
+    entity_col_name: "type_encoded"
+    # ... rest of your config.yaml ...
+    # --- End of config.yaml content paste ---
